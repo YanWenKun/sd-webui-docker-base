@@ -1,0 +1,37 @@
+# Deps reorganized from A1111/requirements_versions.txt .
+# Removed most of version numbers. Crazy but still works.
+accelerate
+basicsr
+blendmodes
+clean-fid
+einops
+fastapi==0.90.1
+font-roboto
+fonts
+gfpgan
+GitPython
+gradio==3.16.2
+httpcore
+inflection
+jsonmerge
+kornia
+lark
+numpy
+omegaconf
+piexif
+Pillow
+pytorch_lightning
+realesrgan
+resize-right
+safetensors
+scikit-image
+timm
+torch
+torchdiffeq
+torchsde
+transformers
+# Deps for sd-webui extensions.
+# Not necessary but save some time.
+flask
+Send2Trash
+svglib
