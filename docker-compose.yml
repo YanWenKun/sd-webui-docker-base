@@ -1,0 +1,22 @@
+version: "3"
+services:
+  stable-diffusion:
+    container_name: sd-webui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: "yanwk/sd-webui-base"
+    ports:
+      - "7860:7860"
+    volumes:
+      - "./volume:/home/runner"
+    environment:
+      - CLI_ARGS=--xformers --medvram --allow-code --api --enable-insecure-extension-access 
+    stop_signal: SIGINT
+    deploy:
+      resources:
+        reservations:
+          devices:
+              - driver: nvidia
+                device_ids: ['0']
+                capabilities: [gpu]
