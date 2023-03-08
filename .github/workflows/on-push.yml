@@ -34,8 +34,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with: 
           image: yanwk/sd-webui-base
-          tags: | 
-            ${{ build-image-latest.outputs.tags }}
+          tags: ${{ build-image-latest.outputs.tags }}
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESSTOKEN }}
