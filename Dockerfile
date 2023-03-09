@@ -51,4 +51,5 @@ VOLUME /home/runner
 WORKDIR /home/runner
 ENV CLI_ARGS=""
 EXPOSE 7860
+STOPSIGNAL SIGINT
 CMD bash /home/scripts/entrypoint.sh
