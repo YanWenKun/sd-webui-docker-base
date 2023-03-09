@@ -16,5 +16,9 @@ else
     set -e
 fi ;
 
+echo "########################################"
+echo "Starting Stable Diffusion WebUI..."
+echo "########################################"
+
 cd /home/runner/stable-diffusion-webui
 accelerate launch --num_cpu_threads_per_process=6 webui.py --listen --port 7860 ${CLI_ARGS}
