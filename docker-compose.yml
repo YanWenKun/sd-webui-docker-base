@@ -15,6 +15,9 @@ services:
     command: "chown -R runner:runner /home/runner"
   stable-diffusion:
     container_name: sd-webui
+    depends_on:
+      file-chown:
+        condition: service_completed_successfully
     build:
       context: .
       dockerfile: Dockerfile
