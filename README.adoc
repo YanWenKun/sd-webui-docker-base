@@ -6,7 +6,7 @@ image::docs/chart-concept.svg["Concept Design"]
 
 *link:README.zh.adoc[>> 中文文档 <<]*
 
-This repo is inspired by https://github.com/AbdBarho/stable-diffusion-webui-docker[AbdBarho], with different approach, and only support https://github.com/AUTOMATIC1111/stable-diffusion-webui[AUTOMATIC1111/stable-diffusion-webui].
+This repo is inspired by https://github.com/AbdBarho/stable-diffusion-webui-docker[AbdBarho], with a different approach, and supports https://github.com/AUTOMATIC1111/stable-diffusion-webui[AUTOMATIC1111/stable-diffusion-webui] only.
 
 ## Idea
 
@@ -76,7 +76,7 @@ Once the app is loaded, visit http://localhost:7860/
 [[q-n-a]]
 ## Q & A
 
-Q: My GPU only have 4G of VRAM +
+Q: My GPU only have 4GB VRAM +
 A: Modify args in `CLI_ARGS`, change `--medvram` to `--lowvram`.
 
 Q: Can I run it without a NVIDIA GPU? +
@@ -92,7 +92,7 @@ More `CLI_ARGS` available at https://github.com/AUTOMATIC1111/stable-diffusion-w
 Q: Why are you using latest version of dependencies? +
 A: Try to squeeze more performance out of GPUs (especially PyTorch).
 
-Q: Will upstream change break this image? +
+Q: Will upstream changes break this image? +
 A: Probably will with major changes in `launch.py` & `requirements_versions.txt`, otherwise unlikely. User's data will always stay safe. User just need to update Docker image after I update this repo.
 
 Q: Will DreamBooth be bundled? +
