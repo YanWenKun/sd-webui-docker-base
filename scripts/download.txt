@@ -74,3 +74,5 @@ https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadap
   out=models/ControlNet/t2iadapter_sketch-fp16.safetensors
 https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors
   out=models/ControlNet/t2iadapter_style-fp16.safetensors
+https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt
+  out=/home/runner/.cache/clip/ViT-L-14.pt
