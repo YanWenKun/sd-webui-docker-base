@@ -18,21 +18,13 @@ RUN --mount=type=cache,target=/var/cache/zypp \
 
 # Use TCMALLOC from gperftools.
 ENV LD_PRELOAD=libtcmalloc.so
-ENV PIP_PREFER_BINARY=1
 
 # Install latest PyTorch, fine for now.
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install torch torchvision \
-    && pip install deepspeed triton accelerate \
-    && pip install --pre -U xformers \
-    && pip install gfpgan realesrgan open-clip-torch opencv-python-headless
+    && pip install --pre -U xformers
 
-# Deps via Git.
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install git+https://github.com/openai/CLIP.git \
-    && pip install -r https://github.com/sczhou/CodeFormer/raw/master/requirements.txt
-
-# Deps for A1111.
+# All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r /root/requirements.txt
