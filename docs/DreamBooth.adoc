@@ -1,0 +1,57 @@
+# Building a image for DreamBooth in WebUI
+
+A note on https://github.com/d8ahazard/sd_dreambooth_extension[SD-WebUI's DreamBooth Extension].
+
+Currently DreamBooth Extension is not included in this image. 
+You can download and install it in SD-WebUI's extension page.
+Or you can bundle its dependencies (quite a lot) in Docker image.
+
+(Worth mentioning, consider using https://github.com/bmaltais/kohya_ss[bmaltais/kohya_ss] for training purpose.)
+
+## Files to modify
+
+.requirements.txt
+----
+########################################
+# Deps for DreamBooth Extension
+# https://github.com/d8ahazard/sd_dreambooth_extension
+########################################
+accelerate
+albumentations
+bitsandbytes
+diffusers
+discord-webhook
+fastapi
+ftfy
+gitpython
+lion-pytorch
+mediapipe
+modelcards
+tensorboard>=2.11.2
+tensorflow>=2.11.0
+tensorrt
+tqdm
+transformers
+----
+
+.download.sh
+----
+...
+cd /home/runner/stable-diffusion-webui/extensions
+
+# folder name 'sd_dreambooth_extension' needs to remain unchanged.
+git clone https://github.com/d8ahazard/sd_dreambooth_extension.git
+----
+
+.Dockerfile
+[source,sh]
+----
+...
+# After pip install
+cd /usr/lib64/python3.10/site-packages/tensorrt
+ln -s libnvinfer_plugin.so.8 libnvinfer_plugin.so.7
+ln -s libnvinfer.so.8 libnvinfer.so.7
+
+# Optional
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/python3.10/site-packages/tensorrt
+----
