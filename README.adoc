@@ -12,7 +12,7 @@ This repo is inspired by https://github.com/AbdBarho/stable-diffusion-webui-dock
 
 A heavy user of SD-WebUI would probably have a lot of models, extensions, and want everything up-to-date. This Docker image is how I figured out to manage them: 
 
-Keeping the bloated app in one place, and leaving the dependency mess in Docker.
+Keeping the app in one place, and leaving the dependency in Docker.
 
 
 ## How it works

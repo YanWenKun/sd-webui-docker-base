@@ -1,0 +1,49 @@
+# Build with PyTorch 2
+
+Using PyTorch 2 can potentially boost performance, but may suffer from bugs and unstability.
+
+Also, you'll need to compile-install xformers.
+
+.Dockerfile
+[source,dockerfile]
+----
+# Install PyTorch 2
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install numpy --pre torch torchvision --force-reinstall \
+        --index-url https://download.pytorch.org/whl/nightly/cu117 
+
+
+# Setup NVCC for compiling xformers
+RUN --mount=type=cache,target=/var/cache/zypp \
+    printf "\
+[cuda-opensuse15-x86_64]\n\
+name=cuda-opensuse15-x86_64\n\
+baseurl=https://developer.download.nvidia.com/compute/cuda/repos/opensuse15/x86_64\n\
+enabled=1\n\
+gpgcheck=1\n\
+gpgkey=https://developer.download.nvidia.com/compute/cuda/repos/opensuse15/x86_64/D42D0685.pub\n" \
+    > /etc/zypp/repos.d/cuda-opensuse15.repo \
+    && zypper --gpg-auto-import-keys \
+        install --no-confirm --no-recommends --auto-agree-with-licenses \
+        cuda-nvcc-11-7 
+
+ENV PATH="${PATH}:/usr/local/cuda-11.7/bin"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda-11.7/lib64"
+
+
+# Compling xformers
+# Using "default" CUDA arch versions here. You may want to change to your preference:
+# https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
+ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6"
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install ninja \
+    && pip install -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
+
+----
+
+## Ref
+
+https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/12.1.0/ubi9/base/Dockerfile
+
+https://facebookresearch.github.io/xformers/custom_parts/index.html
