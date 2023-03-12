@@ -11,7 +11,7 @@ Yet another Docker image for [AUTOMATIC1111/stable-diffusion-webui](https://gith
 ## Features
 
 1. At first start, a script will download latest SD-WebUI, some extensions and essential models.
-2. The whole SD-WebUI will be stored in a local folder (`./volume/stable-diffusion-webui`).
+2. The whole SD-WebUI will be stored in a local folder (`./storage/stable-diffusion-webui`).
 3. If you already have a SD-WebUI bundle, put it there so the start script will skip downloading.
 4. At every restart of the container, a script will update SD-WebUI & its extensions.
 
@@ -36,13 +36,13 @@ docker image prune
 OR using `docker run` :
 
 ```sh
-mkdir volume
+mkdir storage
 
 docker run -it \
   --name sd-webui \
   --gpus all \
   -p 7860:7860 \
-  -v "$(pwd)"/volume:/home/runner \
+  -v "$(pwd)"/storage:/home/runner \
   --env CLI_ARGS="--xformers --medvram --allow-code --api --enable-insecure-extension-access" \
   yanwk/sd-webui-base
 

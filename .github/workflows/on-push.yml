@@ -7,7 +7,7 @@ on:
       - 'docker-compose*.yml'
       - 'README*'
       - 'docs/**'
-      - 'volume/**'
+      - 'storage/**'
       - 'nightly/**'
       - '.github/**'
       - '!.github/workflows/on-push.yml'

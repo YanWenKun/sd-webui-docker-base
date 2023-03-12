@@ -11,7 +11,7 @@ services:
     image: "yanwk/sd-webui-base:nightly"
     user: "root"
     volumes: 
-      - "../volume:/home/runner"
+      - "../storage:/home/runner"
     command: "chown -R runner:runner /home/runner"
   stable-diffusion:
     container_name: sd-webui
@@ -25,7 +25,7 @@ services:
     ports:
       - "7860:7860"
     volumes:
-      - "../volume:/home/runner"
+      - "../storage:/home/runner"
     environment:
       - CLI_ARGS=--xformers --medvram --allow-code --api --enable-insecure-extension-access 
     stop_signal: SIGINT

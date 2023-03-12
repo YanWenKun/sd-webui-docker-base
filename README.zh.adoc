@@ -13,7 +13,7 @@ image::docs/chart-concept.zh.svg["理念"]
 ## 工作流程
 
 1. 初次启动时，启动脚本会下载 SD-WebUI、必要的模型以及一些扩展。
-2. 整个 SD-WebUI 会保存在本地 (`./volume/stable-diffusion-webui`) 。
+2. 整个 SD-WebUI 会保存在本地 (`./storage/stable-diffusion-webui`) 。
 3. 如果你已经有了现成的 SD-WebUI 包，放在上述目录，启动脚本会跳过下载。
 4. 之后容器每次启动时，启动脚本会自动更新 SD-WebUI 及其扩展。
 
@@ -50,13 +50,13 @@ docker image prune
 .方法 B 使用 `docker run`
 [source,sh]
 ----
-mkdir volume
+mkdir storage
 
 docker run -it \
   --name sd-webui \
   --gpus all \
   -p 7860:7860 \
-  -v "$(pwd)"/volume:/home/runner \
+  -v "$(pwd)"/storage:/home/runner \
   --env CLI_ARGS="--xformers --medvram --allow-code --api --enable-insecure-extension-access" \
   yanwk/sd-webui-base
 
@@ -128,7 +128,7 @@ docker build -f Dockerfile -t yanwk/sd-webui-base --progress=plain .
 [source,sh]
 ----
 docker run -it --rm --gpus all -p 7860:7860 \
-  -v "$(pwd)"/volume:/home/runner \
+  -v "$(pwd)"/storage:/home/runner \
   --env CLI_ARGS="--xformers --medvram" \
   yanwk/sd-webui-base
 ----
@@ -137,7 +137,7 @@ docker run -it --rm --gpus all -p 7860:7860 \
 [source,sh]
 ----
 docker run -it --rm --gpus all \
-  -v "$(pwd)"/volume:/home/runner \
+  -v "$(pwd)"/storage:/home/runner \
   -p 7860:7860 \
   --user root \
   -e CLI_ARGS="--xformers --medvram --allow-code --api --enable-insecure-extension-access --ckpt ./test/test_files/empty.pt" \

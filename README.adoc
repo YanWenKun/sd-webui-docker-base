@@ -18,7 +18,7 @@ Keeping the app & data in one place, and leaving the dependency in Docker.
 ## How it works
 
 1. At first start, a script will download latest SD-WebUI, some extensions and essential models.
-2. The whole SD-WebUI will be stored in a local folder (`./volume/stable-diffusion-webui`).
+2. The whole SD-WebUI will be stored in a local folder (`./storage/stable-diffusion-webui`).
 3. If you already have a SD-WebUI bundle, put it there so the start script will skip downloading.
 4. At every restart of the container, a script will update SD-WebUI & its extensions.
 
@@ -54,13 +54,13 @@ docker image prune
 .B. Using `docker run`
 [source,sh]
 ----
-mkdir volume
+mkdir storage
 
 docker run -it \
   --name sd-webui \
   --gpus all \
   -p 7860:7860 \
-  -v "$(pwd)"/volume:/home/runner \
+  -v "$(pwd)"/storage:/home/runner \
   --env CLI_ARGS="--xformers --medvram --allow-code --api --enable-insecure-extension-access" \
   yanwk/sd-webui-base
 
@@ -113,7 +113,7 @@ docker build -f Dockerfile -t yanwk/sd-webui-base --progress=plain .
 [source,sh]
 ----
 docker run -it --rm --gpus all -p 7860:7860 \
-  -v "$(pwd)"/volume:/home/runner \
+  -v "$(pwd)"/storage:/home/runner \
   --env CLI_ARGS="--xformers --medvram" \
   yanwk/sd-webui-base
 ----
@@ -122,7 +122,7 @@ docker run -it --rm --gpus all -p 7860:7860 \
 [source,sh]
 ----
 docker run -it --rm --gpus all \
-  -v "$(pwd)"/volume:/home/runner \
+  -v "$(pwd)"/storage:/home/runner \
   -p 7860:7860 \
   --user root \
   -e CLI_ARGS="--xformers --medvram --allow-code --api --enable-insecure-extension-access --ckpt ./test/test_files/empty.pt" \
