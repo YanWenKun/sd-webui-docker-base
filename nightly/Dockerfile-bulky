@@ -70,7 +70,7 @@ RUN sed -i 's/^CREATE_MAIL_SPOOL=yes/CREATE_MAIL_SPOOL=no/' /etc/default/useradd
     && useradd runner -g runner -d /home/runner \
     && chown runner:runner /home/runner /home/scripts
 
-COPY --chown=runner:runner ["download.sh","download.txt","entrypoint.sh","update.sh", "/home/scripts/"]
+COPY --chown=runner:runner scripts/. /home/scripts/
 
 USER runner:runner
 VOLUME /home/runner
