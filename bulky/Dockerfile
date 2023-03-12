@@ -23,7 +23,7 @@ gpgkey=https://developer.download.nvidia.com/compute/cuda/repos/opensuse15/x86_6
         > /etc/zypp/repos.d/cuda-opensuse15.repo \
     && zypper --gpg-auto-import-keys \
         install --no-confirm --no-recommends --auto-agree-with-licenses \
-            python310 python310-pip \
+            python310 python310-pip python310-devel \
             git aria2 fish \
             gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
             cuda-cudart-11-8 cuda-compat-11-8 \
