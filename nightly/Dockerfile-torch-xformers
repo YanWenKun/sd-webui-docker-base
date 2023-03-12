@@ -1,0 +1,23 @@
+################################################################################
+# Dockerfile that builds 'yanwk/sd-webui-base:torch-xformers'.
+# A environment with latest PyTorch2 & xFormers compile-installed.
+################################################################################
+
+FROM yanwk/sd-webui-base:cuda-devel AS Stage1
+
+WORKDIR /root
+
+# Magma for PyTorch2
+# https://bitbucket.org/icl/magma/raw/master/README
+# If 'icx' or 'icpx' not found, try:
+# RUN source /opt/intel/oneapi/setvars.sh intel64
+RUN git clone https://bitbucket.org/icl/magma.git \
+    && cd magma \
+    && cp -f make.inc-examples/make.inc.mkl-icc-ilp64 make.inc \
+    && sed -i 's/^#GPU_TARGET.*/GPU_TARGET=sm_60 sm_61 sm_62 sm_70 sm_72 sm_75 sm_80 sm_86 sm_87 sm_89 sm_90 sm_90a/' make.inc \
+    && sed -i 's/^CC\s*=\s*icc$/CC=icx/' make.inc \
+    && sed -i 's/^CXX\s*=\s*icpc$/CXX=icpx/' make.inc \
+    && sed -i 's/^#CUDADIR.*/CUDADIR=\/usr\/local\/cuda/' make.inc \
+    && sed -i 's/^#MKLROOT.*/MKLROOT=\/opt\/intel\/oneapi\/mkl\/latest/' make.inc \
+    && make \
+    && make install prefix=/usr/local/magma
