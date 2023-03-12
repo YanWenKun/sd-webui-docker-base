@@ -1,5 +1,5 @@
 ################################################################################
-# Dockerfile that builds 'yanwk/sd-webui-base:cuda-devel'.
+# Dockerfile that builds 'yanwk/sd-webui-base:dev-env'.
 # A environment with CUDA devkit & Intel MKL
 # that can be used for compiling PyTorch2 (w/ Magma) & xFormers.
 # This image would be large, and less update is needed.
