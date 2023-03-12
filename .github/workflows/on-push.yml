@@ -9,6 +9,8 @@ on:
       - 'docs/**'
       - 'volume/'
       - 'bulky/'
+      - '.github/'
+      - '!.github/workflows/on-push.yml'
 
 jobs:
 
