@@ -2,6 +2,7 @@
 # Dockerfile that builds 'yanwk/sd-webui-base:bulky'.
 # A runtime environment for AUTOMATIC1111/stable-diffusion-webui.
 # With latest PyTorch2, xFormers.
+# This image will timeout (>30min) on GitHub Actions, so only use it locally.
 ################################################################################
 
 FROM opensuse/leap:15.4

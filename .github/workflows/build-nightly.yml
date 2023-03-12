@@ -1,4 +1,4 @@
-name: Publish "bulky" to Docker Hub
+name: Publish "nightly" to Docker Hub
 
 on: workflow_dispatch # trigger manually
 
@@ -28,6 +28,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./bulky
-          tags: yanwk/sd-webui-base:bulky
+          context: ./nightly
+          tags: yanwk/sd-webui-base:nightly
           push: true

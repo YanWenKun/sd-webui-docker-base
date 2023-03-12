@@ -8,7 +8,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: "yanwk/sd-webui-base:bulky"
+    image: "yanwk/sd-webui-base:nightly"
     user: "root"
     volumes: 
       - "../volume:/home/runner"
@@ -21,7 +21,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: "yanwk/sd-webui-base:bulky"
+    image: "yanwk/sd-webui-base:nightly"
     ports:
       - "7860:7860"
     volumes:
