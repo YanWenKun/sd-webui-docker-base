@@ -1,18 +1,19 @@
 ################################################################################
 # Dockerfile that builds 'yanwk/sd-webui-base:magma'.
 # Complie-install magma. 
-# It takes VERY long time.
+# This takes 20~30min on a Ryzen 1700 8-Core CPU to build.
 ################################################################################
 
 FROM yanwk/sd-webui-base:dev-env
+
+LABEL maintainer="code@yanwk.fun"
 
 WORKDIR /root
 
 # Magma for PyTorch2
 # https://bitbucket.org/icl/magma/raw/master/README
-# If 'icx' or 'icpx' not found, try:
-# RUN source /opt/intel/oneapi/setvars.sh intel64
-RUN cd /root
+RUN cd /root \
+    && source /opt/intel/oneapi/setvars.sh intel64 \
     && git clone --depth=1 https://bitbucket.org/icl/magma.git \
     && cd magma \
     && cp -f make.inc-examples/make.inc.mkl-icc-ilp64 make.inc \
@@ -21,5 +22,29 @@ RUN cd /root
     && sed -i 's/^CXX\s*=\s*icpc$/CXX=icpx/' make.inc \
     && sed -i 's/^#CUDADIR.*/CUDADIR=\/usr\/local\/cuda/' make.inc \
     && sed -i 's/^#MKLROOT.*/MKLROOT=\/opt\/intel\/oneapi\/mkl\/latest/' make.inc \
-    && make \
-    && make install prefix=/usr/local/magma
+    && make generate \
+    && mkdir build \
+    && cd build \
+    && cmake .. -G Ninja \
+    && ninja \
+    && ninja install
+
+# GPU_TARGET in codename format
+# GPU_TARGET=Pascal Volta Turing Ampere Hopper
+
+# Other compile tools reference
+# 1. Using cmake
+# (-j for parallel)
+# && make generate \
+# && mkdir build \
+# && cd build \
+# && cmake .. \
+# && cmake --build . -j \
+# && cmake install
+
+# 2. Using make
+# Don't need 'make generate'
+# (-j for parallel, -j17 runs 17 jobs)
+# && make -j \
+# && make install prefix=/usr/local/magma
+ 
