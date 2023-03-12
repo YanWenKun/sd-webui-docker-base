@@ -10,7 +10,7 @@ Yet another Docker image for [AUTOMATIC1111/stable-diffusion-webui](https://gith
 
 ## Features
 
-1. At first start, a script will download latest SD-WebUI, some essential models and some extensions.
+1. At first start, a script will download latest SD-WebUI, some extensions and essential models.
 2. The whole SD-WebUI will be stored in a local folder (`./volume/stable-diffusion-webui`).
 3. If you already have a SD-WebUI bundle, put it there so the start script will skip downloading.
 4. At every restart of the container, a script will update SD-WebUI & its extensions.
