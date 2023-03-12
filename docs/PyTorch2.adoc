@@ -37,7 +37,7 @@ ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda-11.7/lib64"
 ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6"
 
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install ninja \
+    pip install ninja wheel \
     && pip install -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
 
 ----

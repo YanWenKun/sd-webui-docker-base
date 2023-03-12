@@ -49,11 +49,11 @@ git clone https://github.com/d8ahazard/sd_dreambooth_extension.git
 ----
 ...
 # After pip install
-RUN cd /usr/lib64/python3.10/site-packages/tensorrt \
+RUN cd /usr/lib/python3.10/site-packages/tensorrt \
     && ln -s libnvinfer_plugin.so.8 libnvinfer_plugin.so.7 \
     && ln -s libnvinfer.so.8 libnvinfer.so.7
 
 ...
 # Optional
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.10/site-packages/tensorrt"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/python3.10/site-packages/tensorrt"
 ----

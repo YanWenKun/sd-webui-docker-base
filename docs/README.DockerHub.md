@@ -6,7 +6,7 @@
 
 **[中文文档在 GITHUB 上](https://github.com/YanWenKun/sd-webui-docker-base/blob/main/README.zh.adoc)**
 
-Yet another Docker image of [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), with "easy to update" in mind.
+Yet another Docker image for [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), with "easy to update" in mind.
 
 ## Features
 
