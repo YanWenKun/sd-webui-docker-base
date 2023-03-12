@@ -4,9 +4,9 @@
 # With latest PyTorch2, xFormers.
 ################################################################################
 
-LABEL maintainer="code@yanwk.fun"
-
 FROM opensuse/leap:15.4
+
+LABEL maintainer="code@yanwk.fun"
 
 WORKDIR /root
 
