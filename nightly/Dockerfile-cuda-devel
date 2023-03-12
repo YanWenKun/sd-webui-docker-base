@@ -32,7 +32,7 @@ gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.
         > /etc/zypp/repos.d/intel-oneapi.repo \
     && zypper --gpg-auto-import-keys \
         install --no-confirm --no-recommends --auto-agree-with-licenses \
-            git make cmake python310 python310-pip python310-devel \
+            git make cmake python311 python311-pip python311-devel \
             intel-oneapi-compiler-dpcpp-cpp intel-oneapi-compiler-fortran \
             intel-oneapi-mkl intel-oneapi-mkl-devel \
             cuda-cudart-12-1 cuda-compat-12-1 \
@@ -46,7 +46,10 @@ gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.
 # Note: 'icc' is replaced by 'icx', 'icpc' is replaced by 'icpx'
 # https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-dpcpp-compiler/top/get-started-on-linux.html
 RUN source /opt/intel/oneapi/setvars.sh intel64 \
-    && ln -s /usr/bin/python3 /usr/bin/python
+    && ln -s /usr/bin/python3.11 /usr/bin/python \
+    && ln -s /usr/bin/python3.11 /usr/bin/python3 \
+    && ln -s /usr/bin/python3.11-config /usr/bin/python3-config \
+    && ln -s /usr/bin/pydoc3.11 /usr/bin/pydoc3
 
 # PATH for NVCC
 ENV PATH="${PATH}:/usr/local/cuda-12.1/bin"
