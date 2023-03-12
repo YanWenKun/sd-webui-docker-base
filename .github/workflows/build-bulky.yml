@@ -1,14 +1,4 @@
-name: Publish to Docker Hub
-
-on:
-  push:
-    branches: [ main ]
-    paths-ignore:
-      - 'docker-compose.yml'
-      - 'README*'
-      - 'docs/**'
-      - 'volume/'
-      - 'bulky/'
+name: Publish "bulky" to Docker Hub (trigger manually)
 
 jobs:
 
@@ -33,5 +23,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
+          context: ./bulky
+          tags: yanwk/sd-webui-base:bulky
           push: true
-          tags: yanwk/sd-webui-base:latest
