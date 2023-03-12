@@ -8,10 +8,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: "yanwk/sd-webui-base"
+    image: "yanwk/sd-webui-base:bulky"
     user: "root"
     volumes: 
-      - "./volume:/home/runner"
+      - "../volume:/home/runner"
     command: "chown -R runner:runner /home/runner"
   stable-diffusion:
     container_name: sd-webui
@@ -21,11 +21,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: "yanwk/sd-webui-base"
+    image: "yanwk/sd-webui-base:bulky"
     ports:
       - "7860:7860"
     volumes:
-      - "./volume:/home/runner"
+      - "../volume:/home/runner"
     environment:
       - CLI_ARGS=--xformers --medvram --allow-code --api --enable-insecure-extension-access 
     stop_signal: SIGINT

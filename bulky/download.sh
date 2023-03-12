@@ -28,6 +28,8 @@ git clone https://github.com/salesforce/BLIP.git \
 mkdir -p /home/runner/stable-diffusion-webui/extensions
 cd /home/runner/stable-diffusion-webui/extensions
 
+# folder name 'sd_dreambooth_extension' needs to remain unchanged.
+git clone https://github.com/d8ahazard/sd_dreambooth_extension.git
 git clone https://github.com/Mikubill/sd-webui-controlnet.git \
     controlnet
 git clone https://github.com/hnmr293/posex.git \

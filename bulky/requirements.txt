@@ -46,6 +46,22 @@ transformers
 # Deps for sd-webui extensions.
 # Not necessary but save some time.
 ########################################
-flask
+Flask
 Send2Trash
 svglib
+########################################
+# Deps for DreamBooth Extension
+# https://github.com/d8ahazard/sd_dreambooth_extension
+########################################
+albumentations
+bitsandbytes
+diffusers
+discord-webhook
+ftfy
+lion-pytorch
+mediapipe
+modelcards
+tensorboard==2.11.2
+tensorflow==2.11.0
+tensorrt==8.5.3.1
+tqdm
