@@ -1,9 +1,10 @@
 ################################################################################
 # Dockerfile that builds 'yanwk/sd-webui-base:dev-env'.
-# A environment with CUDA devkit & Intel MKL
+# A environment with CUDA devkit & Intel C++ Compiler & Intel MKL
 # that can be used for compiling PyTorch2 (w/ Magma) & xFormers.
-# This image would be large, and less update is needed.
+# This image is ~5.5GiB large, and only needs monthly build.
 ################################################################################
+
 FROM opensuse/tumbleweed:latest
 
 LABEL maintainer="code@yanwk.fun"
@@ -32,7 +33,8 @@ gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.
         > /etc/zypp/repos.d/intel-oneapi.repo \
     && zypper --gpg-auto-import-keys \
         install --no-confirm --no-recommends --auto-agree-with-licenses \
-            git make cmake python310 python310-pip python310-devel \
+            git make cmake ninja find fish \
+            python310 python310-pip python310-devel \
             intel-oneapi-compiler-dpcpp-cpp intel-oneapi-compiler-fortran \
             intel-oneapi-mkl intel-oneapi-mkl-devel \
             cuda-cudart-12-1 cuda-compat-12-1 \
