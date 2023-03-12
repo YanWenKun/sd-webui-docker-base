@@ -44,11 +44,7 @@ gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.
             cuda-nvml-devel-12-1 libcublas-devel-12-1 libnpp-devel-12-1 \
             cuda-nvcc-12-1 cuda-nvrtc-devel-12-1 
 
-# Need to set environment variables after installation
-# Note: 'icc' is replaced by 'icx', 'icpc' is replaced by 'icpx'
-# https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-dpcpp-compiler/top/get-started-on-linux.html
-RUN source /opt/intel/oneapi/setvars.sh intel64 \
-    && ln -s /usr/bin/python3 /usr/bin/python
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # PATH for NVCC
 ENV PATH="${PATH}:/usr/local/cuda-12.1/bin"

@@ -12,8 +12,14 @@ WORKDIR /root
 
 # Magma for PyTorch2
 # https://bitbucket.org/icl/magma/raw/master/README
+
+# Tip: Set environment variables for Intel Compilers at container start
+# Note: 'icc' is replaced by 'icx', 'icpc' is replaced by 'icpx'
+# https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-dpcpp-compiler/top/get-started-on-linux.html
+# https://www.intel.com/content/www/us/en/develop/documentation/onemkl-linux-developer-guide/top/getting-started/setting-environment-variables/scripts-to-set-environment-variables.html
+
 RUN cd /root \
-    && source /opt/intel/oneapi/setvars.sh intel64 \
+    && source /opt/intel/oneapi/setvars.sh intel64 mod ilp64 \
     && git clone --depth=1 https://bitbucket.org/icl/magma.git \
     && cd magma \
     && cp -f make.inc-examples/make.inc.mkl-icc-ilp64 make.inc \
