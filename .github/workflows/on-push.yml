@@ -4,12 +4,12 @@ on:
   push:
     branches: [ main ]
     paths-ignore:
-      - 'docker-compose.yml'
+      - 'docker-compose*.yml'
       - 'README*'
       - 'docs/**'
-      - 'volume/'
-      - 'bulky/'
-      - '.github/'
+      - 'volume/**'
+      - 'bulky/**'
+      - '.github/**'
       - '!.github/workflows/on-push.yml'
 
 jobs:
