@@ -1,8 +1,8 @@
 ################################################################################
 # Dockerfile that builds 'yanwk/sd-webui-base:bulky'.
 # A runtime environment for AUTOMATIC1111/stable-diffusion-webui.
-# With latest PyTorch2, xFormers.
-# This image will timeout (>30min) on GitHub Actions, so only use it locally.
+# With latest PyTorch2, xFormers and CUDA Toolkit, the image size will be large.
+# Building this image could timeout on GitHub Actions, so better build it locally.
 # Beware, check the version number before build!
 ################################################################################
 
@@ -49,7 +49,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Compile-install xformers
 # https://github.com/facebookresearch/xformers/blob/main/README.md#install-troubleshooting
 # https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6"
+ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0;9.0a"
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
 

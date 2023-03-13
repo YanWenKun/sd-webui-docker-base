@@ -1,23 +1,60 @@
 ################################################################################
+# DO NOT USE THIS DOCKERFILE!
+# This is write for CUDA 12.x, which PyTorch is still far from compatible with.
+################################################################################
 # Dockerfile that builds 'yanwk/sd-webui-base:torch-xformers'.
 # A environment with latest PyTorch2 & xFormers compile-installed.
 ################################################################################
 
-FROM yanwk/sd-webui-base:cuda-devel AS Stage1
+FROM yanwk/sd-webui-base:magma AS Stage1
 
 WORKDIR /root
 
-# Magma for PyTorch2
-# https://bitbucket.org/icl/magma/raw/master/README
-# If 'icx' or 'icpx' not found, try:
-# RUN source /opt/intel/oneapi/setvars.sh intel64
-RUN git clone https://bitbucket.org/icl/magma.git \
-    && cd magma \
-    && cp -f make.inc-examples/make.inc.mkl-icc-ilp64 make.inc \
-    && sed -i 's/^#GPU_TARGET.*/GPU_TARGET=sm_60 sm_61 sm_62 sm_70 sm_72 sm_75 sm_80 sm_86 sm_87 sm_89 sm_90 sm_90a/' make.inc \
-    && sed -i 's/^CC\s*=\s*icc$/CC=icx/' make.inc \
-    && sed -i 's/^CXX\s*=\s*icpc$/CXX=icpx/' make.inc \
-    && sed -i 's/^#CUDADIR.*/CUDADIR=\/usr\/local\/cuda/' make.inc \
-    && sed -i 's/^#MKLROOT.*/MKLROOT=\/opt\/intel\/oneapi\/mkl\/latest/' make.inc \
-    && make \
-    && make install prefix=/usr/local/magma
+RUN set -eu \
+    && mkdir -p /root/wheels \
+    && source /opt/intel/oneapi/setvars.sh intel64 mod ilp64
+
+# Prepare to compile PyTorch
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install wheel setuptools numpy \
+    && cd /root \
+    && git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules \
+        https://github.com/pytorch/pytorch \
+    && cd pytorch \
+    && pip install -r requirements.txt 
+
+# # fix for fbgemm
+# RUN --mount=type=cache,target=/var/cache/zypp \
+#     zypper --gpg-auto-import-keys \
+#         install -y --no-recommends --auto-agree-with-licenses \
+#         openblas-common-devel libopenblas_pthreads-devel openblas_pthreads-devel-static \
+#     && cd /root/pytorch/third_party/fbgemm \
+#     && git checkout main && git pull \
+#     && git submodule sync && git submodule update --init --recursive \
+#     && sed -i 's/-Werror//' CMakeLists.txt \
+#     && rm -rf build && cmake -B build -D FBGEMM_BUILD_BENCHMARKS=off -G Ninja \
+#     && cd build && ninja && ninja install 
+
+# Compile PyTorch
+RUN --mount=type=cache,target=/root/.cache/pip \
+    cd /root/pytorch \
+    && python setup.py develop \
+    && python setup.py bdist_wheel -d /root/wheels
+
+# Compile xFormers
+# https://github.com/facebookresearch/xformers/blob/main/README.md#install-troubleshooting
+# https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
+ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0;9.0a"
+RUN --mount=type=cache,target=/root/.cache/pip \
+    cd /root \
+    && git clone --depth=1 --recurse-submodules --shallow-submodules \
+        https://github.com/facebookresearch/xformers.git \
+    && cd xformers \
+    && pip install -r requirements.txt \
+    && python setup.py develop \
+    && python setup.py bdist_wheel -d /root/wheels
+
+# Save the result
+FROM alpine:latest
+
+COPY --from=Stage1 /root/wheels /wheels
