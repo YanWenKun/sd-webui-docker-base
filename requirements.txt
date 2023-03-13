@@ -17,7 +17,7 @@ basicsr
 blendmodes
 clean-fid
 einops
-fastapi==0.90.1
+fastapi==0.94.0
 font-roboto
 fonts
 gfpgan
@@ -46,6 +46,6 @@ transformers
 # Deps for sd-webui extensions.
 # Not necessary but save some time.
 ########################################
-flask
+Flask
 Send2Trash
 svglib
