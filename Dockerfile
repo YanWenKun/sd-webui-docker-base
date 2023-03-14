@@ -19,10 +19,10 @@ RUN --mount=type=cache,target=/var/cache/zypp \
 # Use TCMALLOC from gperftools.
 ENV LD_PRELOAD=libtcmalloc.so
 
-# Install latest PyTorch, fine for now.
+# Install PyTorch & xFormers (stable version)
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install torch torchvision \
-    && pip install --pre -U xformers
+    && pip install xformers
 
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
