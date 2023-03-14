@@ -25,12 +25,8 @@ ENV LD_PRELOAD=libtcmalloc.so
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install wheel setuptools numpy 
 
-# Install PyTorch (nightly, 2.1+).
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --pre torch torchvision --force-reinstall \
-        --index-url https://download.pytorch.org/whl/nightly/cu117 
-
 # Install xFormers (dev)
+# We will override its PyTorch dep later.
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --pre -U xformers
 
@@ -38,6 +34,11 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY ["requirements.txt","/root/"]
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r /root/requirements.txt
+
+# Install PyTorch (nightly, 2.1+).
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --pre torch torchvision --force-reinstall \
+        --index-url https://download.pytorch.org/whl/nightly/cu117 
 
 # Fix for TensorRT
 WORKDIR /usr/lib/python3.10/site-packages/tensorrt
