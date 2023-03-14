@@ -82,7 +82,7 @@ RUN --mount=type=cache,target=/root/xformers/build \
 
 # 'build' folder is mounted as cache and gone afterwards. There's no need to keep src.
 # But we keep wheel file for any further use.
-RUN rm -rf /root/xformers
+RUN rm -rf /root/xformers \
     && pip install /root/wheels/*.whl
 
 # All remaining deps are described in txt
