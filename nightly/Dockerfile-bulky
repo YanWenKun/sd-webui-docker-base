@@ -65,7 +65,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Compile-install xformers
 # https://github.com/facebookresearch/xformers/blob/main/README.md#install-troubleshooting
 # https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0;9.0a"
+ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0"
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
 

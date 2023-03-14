@@ -18,6 +18,8 @@ WORKDIR /root
 # https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-dpcpp-compiler/top/get-started-on-linux.html
 # https://www.intel.com/content/www/us/en/develop/documentation/onemkl-linux-developer-guide/top/getting-started/setting-environment-variables/scripts-to-set-environment-variables.html
 
+# Tip: Set GPU_TARGET accordingly:
+# https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
 RUN cd /root \
     && source /opt/intel/oneapi/setvars.sh intel64 mod ilp64 \
     && git clone --depth=1 https://bitbucket.org/icl/magma.git \
