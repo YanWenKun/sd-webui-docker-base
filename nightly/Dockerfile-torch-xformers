@@ -3,10 +3,10 @@
 # This is write for CUDA 12.x, which PyTorch is still far from compatible with.
 ################################################################################
 # Dockerfile that builds 'yanwk/sd-webui-base:torch-xformers'.
-# A environment with latest PyTorch2 & xFormers compile-installed.
+# A environment for compiling latest PyTorch2 & xFormers.
 ################################################################################
 
-FROM yanwk/sd-webui-base:magma AS Stage1
+FROM yanwk/sd-webui-base:magma AS stage-1
 
 WORKDIR /root
 
@@ -36,7 +36,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 #     && cd build && ninja && ninja install 
 
 # Compile PyTorch
-RUN --mount=type=cache,target=/root/.cache/pip \
+RUN --mount=type=cache,target=/root/pytorch/build \
+    --mount=type=cache,target=/root/pytorch/dist  \
     cd /root/pytorch \
     && python setup.py develop \
     && python setup.py bdist_wheel -d /root/wheels
@@ -55,6 +56,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     && python setup.py bdist_wheel -d /root/wheels
 
 # Save the result
-FROM alpine:latest
+FROM alpine:latest AS stage-final
 
-COPY --from=Stage1 /root/wheels /wheels
+COPY --from=stage-1 /root/wheels /wheels

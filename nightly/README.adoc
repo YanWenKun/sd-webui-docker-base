@@ -95,4 +95,4 @@ Unless you have GPU-specific issue to deal with, there's no need to use nightly 
 
 ## CUDA 12.x
 
-I tried (2023/3/13) building PyTorch on CUDA 12.1, it pops out tons of errors, one after the other. And there's not much I can do. It's better to wait for other people at this moment.
+(2023/3/13) I tried building PyTorch with CUDA 12.1, it pops out tons of errors, one after the other. And there's not much I can do. It's better to wait for other people at this moment.

@@ -5,7 +5,7 @@
 # Also adds dependencies for SD-WebUI DreamBooth Extension.
 ################################################################################
 
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 AS Stage1
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 AS stage-1
 
 WORKDIR /root
 
@@ -35,7 +35,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     && python setup.py bdist_wheel -d /root/wheels
 
 
-FROM opensuse/tumbleweed:latest
+FROM opensuse/tumbleweed:latest AS stage-2
 
 LABEL maintainer="code@yanwk.fun"
 
@@ -85,7 +85,7 @@ COPY --chown=runner:runner scripts/. /home/scripts/
 
 # Install xFormers we just built.
 # Run it lastly so we can benefit time-saving from parallel build.
-COPY --from=Stage1 /root/wheels /tmp/wheels
+COPY --from=stage-1 /root/wheels /tmp/wheels
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install /tmp/wheels/*.whl
 

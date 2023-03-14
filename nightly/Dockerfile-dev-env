@@ -33,7 +33,9 @@ gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.
         > /etc/zypp/repos.d/intel-oneapi.repo \
     && zypper --gpg-auto-import-keys \
         install --no-confirm --no-recommends --auto-agree-with-licenses \
-            git make cmake ninja find fish \
+            git make cmake ninja find \
+            fish shadow mlocate \
+            gperftools-devel \
             python310 python310-pip python310-devel \
             intel-oneapi-compiler-dpcpp-cpp intel-oneapi-compiler-fortran \
             intel-oneapi-mkl intel-oneapi-mkl-devel \
@@ -46,6 +48,8 @@ gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
+# Use TCMALLOC from gperftools.
+ENV LD_PRELOAD=libtcmalloc.so
 # PATH for NVCC
 ENV PATH="${PATH}:/usr/local/cuda-12.1/bin"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda-12.1/lib64"
