@@ -1,0 +1,102 @@
+# 不稳定最新版 Nightly
+
+* 使用 PyTorch 官方的 nightly 版，目前（2023/3/14）为 PyTorch 2.1 - CUDA 11.8
+* 编译安装 https://github.com/facebookresearch/xformers[来自 GitHub 最新的 xFormers]
+** 编译器优化的架构版本（为了节约编译时间）： `6.1;7.5;8.0;8.6;8.9`
+** 参考： https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
+** 覆盖常见游戏卡，算力卡建议按需调整
+** 不含 Hopper，反正也被禁止供货了 :-P
+
+* 预置了 DreamBooth 扩展所需依赖，但是版本很新
+** 如果是从零开始下载 WebUI，则无需干预，脚本会自动下载该插件
+** 如果用 WebUI 的插件管理页面进行安装，则会下载它默认依赖版本，比较老但能用
+** 可以通过手动 `git clone` 下载，避免 WebUI 自动安装老版本依赖
+
+## 运行命令
+
+.方法 A 使用 `docker run` （推荐）
+[source,sh]
+----
+mkdir -p storage
+
+docker run -it \
+  --name sd-webui-nightly \
+  --gpus all \
+  -p 7860:7860 \
+  -v "$(pwd)"/storage:/home/runner \
+  --env CLI_ARGS="--xformers --medvram --allow-code --api --enable-insecure-extension-access" \
+  yanwk/sd-webui-base:nightly
+
+# 更新镜像
+docker rm sd-webui-nightly
+docker pull yanwk/sd-webui-base:nightly
+# 接下来再运行一遍上述 'docker run' 即可
+----
+
+.方法 B 使用 `docker compose`
+[source,sh]
+----
+git clone https://github.com/YanWenKun/sd-webui-docker-base.git
+
+cd sd-webui-docker-base
+
+docker compose -f nightly/docker-compose.yml up --detach
+
+# 更新镜像
+git pull
+docker compose -f nightly/docker-compose.yml pull
+docker compose -f nightly/docker-compose.yml up --detach --remove-orphans
+docker image prune
+----
+
+启动完成后，访问 http://localhost:7860/
+
+其他使用方法 *link:../README.zh.adoc[参照基础说明]* 。
+
+
+## 性能对比
+
+简单测试如下：
+
+----
+显卡： Titan Xp (12G VRAM, Pascal, sm_61) 
+python: 3.10.10
+
+无启动参数：
+
+torch: 1.13.1+cu117
+第一轮 控制台显时： 06:00 网页显时： 5m 56.36s
+第二轮 控制台显时： 06:00 网页显时： 6m 0.69s
+
+含启动参数 --xformers --medvram
+
+torch: 1.13.1+cu117
+xformers: 0.0.16
+第一轮 控制台显时： 03:11 网页显时： 3m 7.06s
+第二轮 控制台显时： 03:07 网页显时： 3m 7.47s
+
+torch: 1.13.1+cu117
+xformers: 0.0.17.dev473
+第一轮 控制台显时： 03:16 网页显时： 3m 9.60s
+第二轮 控制台显时： 03:07 网页显时： 3m 7.06s
+
+torch: 2.1.0.dev20230313+cu118
+xformers: 0.0.17+b6be33a.d20230314
+第一轮 控制台显时： 03:14 网页显时： 3m 8.73s
+第二轮 控制台显时： 03:09 网页显时： 3m 9.56s
+第三轮 控制台显时： 03:10 网页显时： 3m 10.52s
+----
+
+结论：PyTorch 与 xFormers 稳定版已经很好了，除非有硬件设备的匹配，否则没必要追求新版。
+
+## 关于 CUDA 12.x
+
+我曾尝试（2023/3/13）在 CUDA 12.1 环境下编译 PyTorch，但很快我就意识到问题的规模：绝非我一人可以解决。如此众星捧月的巨型项目，没有上新版本，肯定不是出于“求稳”，而是确实有太多工作要做。
+
+但我也提前准备了一些 Dockerfile，等 PyTorch 兼容 12.x 了，可以尝试编译安装。
+
+设想中的流水线顺序：
+
+`dev-env` → `magma` → `torch-xformers` → `nightly`
+
+分开镜像是因为 GitHub Actions 会限制长时间构建，而且各镜像需要更新的频率也确实不同。

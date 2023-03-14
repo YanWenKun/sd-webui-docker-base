@@ -67,7 +67,7 @@ docker run -it \
 # Update image (only when Python components is outdated)
 docker rm sd-webui
 docker pull yanwk/sd-webui-base
-# Then run 'docker run' above again
+# Then re-run 'docker run' above again
 ----
 
 Once the app is loaded, visit http://localhost:7860/
@@ -79,7 +79,7 @@ For image tag `nightly`:
 
 * It builds more frequently.
 * It come with latest PyTorch & xFormers.
-** (Potential performance gain)
+** (Do not use it for performance purpose, you may be disappointed.)
 * It's ready for https://github.com/d8ahazard/sd_dreambooth_extension[DreamBooth Extension].
 
 link:nightly/README.adoc[Read more about using nightly].

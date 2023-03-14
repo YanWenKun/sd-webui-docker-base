@@ -75,7 +75,7 @@ docker pull yanwk/sd-webui-base
 
 * 频繁构建
 * 安装最新的 PyTorch 与 xFormers
-** （可能有免费的性能提升）
+** （但不要指望新版本能有性能提升）
 * 为 https://github.com/d8ahazard/sd_dreambooth_extension[DreamBooth 扩展] 预备好了依赖
 
 link:nightly/README.zh.adoc[阅读 nightly 说明]
