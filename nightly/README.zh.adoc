@@ -1,11 +1,9 @@
 # 不稳定最新版 Nightly
 
-* 使用 PyTorch 官方的 nightly 版，目前（2023/3/14）为 PyTorch 2.1 - CUDA 11.8
-* 编译安装 https://github.com/facebookresearch/xformers[来自 GitHub 最新的 xFormers]
-** 编译器优化的架构版本（为了节约编译时间）： `6.1;7.5;8.0;8.6;8.9`
-** 参考： https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-** 覆盖常见游戏卡，算力卡建议按需调整
-** 不含 Hopper，反正也被禁止供货了 :-P
+* 使用 PyTorch 官方的 nightly 版
+** 当前（2023/3/14）为 PyTorch 2.1 - CUDA 11.8
+* 使用 https://pypi.org/project/xformers/#history[来自 PyPI 的 xFormers pre-release]
+** （使用免费的 GitHub CI 编译会超时，编译目标的 GPU 架构一多就太耗时了）
 
 * 预置了 DreamBooth 扩展所需依赖，但是版本很新
 ** 如果是从零开始下载 WebUI，则无需干预，脚本会自动下载该插件
@@ -88,6 +86,7 @@ xformers: 0.0.17+b6be33a.d20230314
 ----
 
 结论：PyTorch 与 xFormers 稳定版已经很好了，除非有硬件设备的匹配，否则没必要追求新版。
+
 
 ## 关于 CUDA 12.x
 

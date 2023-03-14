@@ -2,13 +2,12 @@
 
 *link:README.zh.adoc[>> 中文文档 <<]*
 
-* Using PyTorch official nightly build, currently (2023/3/14) PyTorch 2.1 - CUDA 11.8
-* Compile-install xFormers from https://github.com/facebookresearch/xformers[GitHub].
-** Compiler gen-code (for saving build time): `6.1;7.5;8.0;8.6;8.9`.
-** Reference: https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-** You may want to adjust it to your need.
+* Using PyTorch official nightly build.
+** Currently (2023/3/14) PyTorch 2.1 - CUDA 11.8
+* Using https://pypi.org/project/xformers/#history[xFormers pre-release from PyPI].
+** (I tried to compile xFormers on GitHub CI, but it will timeout. There are too many GPU arch targets to build, it's very time-consuming. Or maybe just free version limit.)
 
-* DreamBooth Extension ready, note deps are almost latest
+* Ready for DreamBooth Extension. Deps are almost latest.
 ** If you start from blank, you don't need any extra step, the script download everything for you.
 ** If you use WebUI'e extension page to install, it will install its specified version of deps.
 ** You could use `git clone` to download extensions, avoiding WebUI's auto `pip install`.
@@ -89,10 +88,10 @@ run2    console time: 03:09    web page time: 3m 9.56s
 run3    console time: 03:10    web page time: 3m 10.52s
 ----
 
-It's safe to say that the stable version of PyTorch & xFormers is performing good enough.
-Unless you have GPU-specific issue to deal with, there's no need to use nightly version for performance reason.
+It's safe to say that the stable version of PyTorch & xFormers is performing excellent.
+Unless you have GPU-specific issue to deal with, it's not necessary to use nightly version for performance purpose.
 
 
 ## CUDA 12.x
 
-(2023/3/13) I tried building PyTorch with CUDA 12.1, it pops out tons of errors, one after the other. And there's not much I can do. It's better to wait for other people at this moment.
+(2023/3/13) I tried building PyTorch with CUDA 12.1, the errors flooded me. There's not much I can do. It's better to wait for other people at this moment.

@@ -1,7 +1,7 @@
 ################################################################################
 # Dockerfile that builds 'yanwk/sd-webui-base:magma'.
 # Complie-install Magma. See: http://icl.utk.edu/magma/
-# It takes 20~30min to build, with only one GPU_TARGET, on a Ryzen 1700 8-Core CPU.
+# On a Ryzen 1700 8-Core CPU, with only one GPU_TARGET set, it takes 20~30min to build.
 ################################################################################
 
 FROM yanwk/sd-webui-base:dev-env
