@@ -24,7 +24,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # If only 1 GPU_TARGET, it takes ~5min to build, on a 8-Core (Ryzen 1700) CPU.
 # https://github.com/facebookresearch/xformers/blob/main/README.md#install-troubleshooting
 # https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-ENV TORCH_CUDA_ARCH_LIST="6.1;7.0;7.5;8.0;8.6;8.9"
+ENV TORCH_CUDA_ARCH_LIST="6.1;7.5;8.0;8.6;8.9"
 RUN --mount=type=cache,target=/root/.cache/pip \
     cd /root \
     && git clone --depth=1 --recurse-submodules --shallow-submodules \
@@ -47,7 +47,7 @@ RUN --mount=type=cache,target=/var/cache/zypp \
         python310 python310-pip \
         shadow git aria2 \
         gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
-        fish find
+        fish find mlocate
 
 # Use TCMALLOC from gperftools.
 ENV LD_PRELOAD=libtcmalloc.so

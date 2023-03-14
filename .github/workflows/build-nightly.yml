@@ -3,8 +3,8 @@ name: Publish "nightly" to Docker Hub
 on: 
   workflow_dispatch: # trigger manually
   schedule:
-    # Runs on every other day, 07:00 UTC
-    - cron: '0 7 2-30/2 * *'
+    # Runs on every 4 day, 07:00 UTC
+    - cron: '0 7 1-31/4 * *'
 
 jobs:
 
