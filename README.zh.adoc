@@ -74,9 +74,9 @@ docker pull yanwk/sd-webui-base
 标签为 `nightly` 的 Docker 镜像：
 
 * 频繁构建
-* 安装最新的 PyTorch 与 xFormers
-** （但不要指望新版本能有性能提升）
 * 为 https://github.com/d8ahazard/sd_dreambooth_extension[DreamBooth 扩展] 预备好了依赖
+* 安装了最新的开发版 xFormers
+** （但不要指望性能提升，稳定版现在已经很好了）
 
 link:nightly/README.zh.adoc[阅读 nightly 说明]
 
@@ -100,7 +100,7 @@ A: 用 CPU 跑！
 更多 `CLI_ARGS` 参考 https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Command-Line-Arguments-and-Settings[官方文档] 。
 
 Q: 为什么要用这么新的依赖版本？ +
-A: 尽可能利用新版本组件来压榨性能（尤其 PyTorch）。
+A: 尽可能利用新版本组件来压榨性能（使用最新的稳定版 PyTorch & xFormers）。
 
 Q: 上游更新会不会炸 +
 A: 会，上游的 `launch.py` 和 `requirements_versions.txt` 如果修改依赖，本镜像也要跟着调整。届时用户替换镜像即可。

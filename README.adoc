@@ -78,9 +78,9 @@ Once the app is loaded, visit http://localhost:7860/
 For image tag `nightly`:
 
 * It builds more frequently.
-* It come with latest PyTorch & xFormers.
-** (Do not use it for performance purpose, you may be disappointed.)
 * It's ready for https://github.com/d8ahazard/sd_dreambooth_extension[DreamBooth Extension].
+* It come with dev version of xFormers.
+** (Don't expect performance boost, the stable version is good enough now.)
 
 link:nightly/README.adoc[Read more about using nightly].
 
@@ -104,7 +104,7 @@ A: Use CPU!
 More `CLI_ARGS` available at https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Command-Line-Arguments-and-Settings[SD-WebUI Wiki].
 
 Q: Why are you using latest version of dependencies? +
-A: Try to squeeze more performance out of GPUs (especially PyTorch).
+A: Try to squeeze more performance out of GPUs (using latest stable version of PyTorch & xFormers).
 
 Q: Will upstream changes break this image? +
 A: Probably will with major changes in `launch.py` & `requirements_versions.txt`, otherwise unlikely. User's data will always stay safe. User just need to update Docker image after I update this repo.

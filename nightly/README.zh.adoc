@@ -1,14 +1,15 @@
 # 不稳定最新版 Nightly
 
-* 使用 PyTorch 官方的 nightly 版
-** 当前（2023/3/14）为 PyTorch 2.1 - CUDA 11.8
-* 使用 https://pypi.org/project/xformers/#history[来自 PyPI 的 xFormers pre-release]
-** （使用免费的 GitHub CI 编译会超时，编译目标的 GPU 架构一多就太耗时了）
-
 * 预置了 DreamBooth 扩展所需依赖，但是版本很新
-** 如果是从零开始下载 WebUI，则无需干预，脚本会自动下载该插件
+** 如果你是第一次启动，从空白开始，则无需干预，脚本会自动下载该插件
 ** 如果用 WebUI 的插件管理页面进行安装，则会下载它默认依赖版本，比较老但能用
 ** 可以通过手动 `git clone` 下载，避免 WebUI 自动安装老版本依赖
+
+* 使用来自 https://pypi.org/project/xformers/#history[PyPI] 的 xFormers pre-release
+** （编译的目标 GPU 架构太多，使用 GitHub CI 会超时）
+* 使用 PyTorch 1.13.1 + CUDA 11.7
+** （用了二进制的 xFormers 包就得用它指定版本的 PyTorch，强行覆盖会报错，所以只能用稳定版）
+** 你可以使用 link:Dockerfile-bulky[bulky] 镜像来构建仅适配你显卡的 xFormers
 
 ## 运行命令
 
@@ -85,7 +86,7 @@ xformers: 0.0.17+b6be33a.d20230314
 第三轮 控制台显时： 03:10 网页显时： 3m 10.52s
 ----
 
-结论：PyTorch 与 xFormers 稳定版已经很好了，除非有硬件设备的匹配，否则没必要追求新版。
+结论：PyTorch 与 xFormers 稳定版已经很好了，除非有硬件设备需要匹配，否则没必要追求最新版。
 
 
 ## 关于 CUDA 12.x

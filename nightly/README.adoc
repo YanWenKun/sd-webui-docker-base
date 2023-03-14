@@ -2,15 +2,16 @@
 
 *link:README.zh.adoc[>> 中文文档 <<]*
 
-* Using PyTorch official nightly build.
-** Currently (2023/3/14) PyTorch 2.1 - CUDA 11.8
-* Using https://pypi.org/project/xformers/#history[xFormers pre-release from PyPI].
-** (I tried to compile xFormers on GitHub CI, but it will timeout. There are too many GPU arch targets to build, it's very time-consuming. Or maybe just free version limit.)
-
 * Ready for DreamBooth Extension. Deps are almost latest.
 ** If you start from blank, you don't need any extra step, the script download everything for you.
 ** If you use WebUI'e extension page to install, it will install its specified version of deps.
 ** You could use `git clone` to download extensions, avoiding WebUI's auto `pip install`.
+
+* Using xFormers pre-release from https://pypi.org/project/xformers/#history[PyPI].
+** (I tried to compile xFormers on GitHub CI, but it will timeout. There're too many GPU arch targets to build, it's very time-consuming.)
+* Using PyTorch 1.13.1 + CUDA 11.7
+** (By using xFormers binary, the version of PyTorch have to match its specification, therefore I can't use nightly version of PyTorch.)
+** Try build your own link:Dockerfile-bulky[bulky] version of image if you need latest PyTorch.
 
 ## Usage
 
@@ -88,7 +89,7 @@ run2    console time: 03:09    web page time: 3m 9.56s
 run3    console time: 03:10    web page time: 3m 10.52s
 ----
 
-It's safe to say that the stable version of PyTorch & xFormers is performing excellent.
+It's safe to say that the stable version of PyTorch & xFormers is performing good enough.
 Unless you have GPU-specific issue to deal with, it's not necessary to use nightly version for performance purpose.
 
 
