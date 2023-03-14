@@ -50,7 +50,7 @@ docker image prune
 .方法 B 使用 `docker run`
 [source,sh]
 ----
-mkdir storage
+mkdir -p storage
 
 docker run -it \
   --name sd-webui \
@@ -67,6 +67,20 @@ docker pull yanwk/sd-webui-base
 ----
 
 启动完成后，访问 http://localhost:7860/
+
+
+## link:nightly/README.zh.adoc[不稳定最新版]
+
+标签为 `nightly` 的 Docker 镜像：
+
+* 频繁构建
+* 安装最新的 PyTorch 与 xFormers
+** （可能有免费的性能提升）
+* 为 https://github.com/d8ahazard/sd_dreambooth_extension[DreamBooth 扩展] 预备好了依赖
+
+link:nightly/README.zh.adoc[阅读 nightly 说明]
+
+基础代码（ `latest` ）则尽量保持简单易懂、方便修改定制。
 
 
 [[q-n-a]]
@@ -90,11 +104,6 @@ A: 尽可能利用新版本组件来压榨性能（尤其 PyTorch）。
 
 Q: 上游更新会不会炸 +
 A: 会，上游的 `launch.py` 和 `requirements_versions.txt` 如果修改依赖，本镜像也要跟着调整。届时用户替换镜像即可。
-
-Q: DreamBooth 不打包进来？ +
-A: 暂时没有打算，感觉会用到的人不多，我也想尽量让这个代码仓库简单易懂，方便他人修改定制。但我也准备了一份
-link:docs/DreamBooth.adoc[DreamBooth 笔记]
-给想定制的人参考。
 
 
 ## 设计思路

@@ -54,7 +54,7 @@ docker image prune
 .B. Using `docker run`
 [source,sh]
 ----
-mkdir storage
+mkdir -p storage
 
 docker run -it \
   --name sd-webui \
@@ -73,10 +73,24 @@ docker pull yanwk/sd-webui-base
 Once the app is loaded, visit http://localhost:7860/
 
 
+## link:nightly/README.adoc[Nightly Build]
+
+For image tag `nightly`:
+
+* It builds more frequently.
+* It come with latest PyTorch & xFormers.
+** (Potential performance gain)
+* It's ready for https://github.com/d8ahazard/sd_dreambooth_extension[DreamBooth Extension].
+
+link:nightly/README.adoc[Read more about using nightly].
+
+The base `latest` will keep simple and easy for people to modify.
+
+
 [[q-n-a]]
 ## Q & A
 
-Q: My GPU only have 4GB VRAM +
+Q: My GPU only has 4GB VRAM +
 A: Modify args in `CLI_ARGS`, change `--medvram` to `--lowvram`.
 
 Q: Can I run it without a NVIDIA GPU? +
@@ -94,11 +108,6 @@ A: Try to squeeze more performance out of GPUs (especially PyTorch).
 
 Q: Will upstream changes break this image? +
 A: Probably will with major changes in `launch.py` & `requirements_versions.txt`, otherwise unlikely. User's data will always stay safe. User just need to update Docker image after I update this repo.
-
-Q: Will DreamBooth be bundled? +
-A: Not now. I guess not many people gonna use it. And I want to keep this repo simple and easy for people to modify. But still, there's 
-link:docs/DreamBooth.adoc[A note on DreamBooth]
-for anyone who want to build one.
 
 
 ## Some commands for debugging
@@ -132,6 +141,6 @@ docker run -it --rm --gpus all \
 
 ## License
 
-link:LICENSE[Mulan Permissive Software License，Version 2].
+link:LICENSE[Mulan Permissive Software License，Version 2]
 
-It is valid in both Chinese and English, how good is that!
+This open source license is written and valid both in Chinese and English, how good is that!
