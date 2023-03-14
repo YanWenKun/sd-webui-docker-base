@@ -44,7 +44,7 @@ gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.
             cuda-command-line-tools-12-1 cuda-libraries-devel-12-1 \
             cuda-minimal-build-12-1 cuda-cudart-devel-12-1 cuda-nvprof-12-1 \
             cuda-nvml-devel-12-1 libcublas-devel-12-1 libnpp-devel-12-1 \
-            cuda-nvcc-12-1 cuda-nvrtc-devel-12-1 
+            cuda-cccl-12-1 cuda-nvcc-12-1 cuda-nvrtc-devel-12-1 
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 

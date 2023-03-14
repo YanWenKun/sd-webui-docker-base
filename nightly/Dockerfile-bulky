@@ -1,9 +1,10 @@
 ################################################################################
 # Dockerfile that builds 'yanwk/sd-webui-base:bulky'.
-# A runtime environment for AUTOMATIC1111/stable-diffusion-webui.
-# With latest PyTorch2, xFormers and CUDA Toolkit, the image size will be large.
+# A environment not only for running AUTOMATIC1111/stable-diffusion-webui,
+# but also includes all compile tools for Magma, PyTorch & xFormers.
+# Image size will be large.
 # Building this image could timeout on GitHub Actions, so better build it locally.
-# Beware, check the version number before build!
+# Beware, check the version numbers before build!
 ################################################################################
 
 FROM opensuse/leap:15.4
@@ -13,6 +14,7 @@ LABEL maintainer="code@yanwk.fun"
 WORKDIR /root
 
 # https://gitlab.com/nvidia/container-images/cuda/-/tree/master/dist
+# https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-download.html
 RUN --mount=type=cache,target=/var/cache/zypp \
     set -eu \
     && printf "\
@@ -23,16 +25,30 @@ enabled=1\n\
 gpgcheck=1\n\
 gpgkey=https://developer.download.nvidia.com/compute/cuda/repos/opensuse15/x86_64/D42D0685.pub\n" \
         > /etc/zypp/repos.d/cuda-opensuse15.repo \
+    && printf "\
+[intel-oneapi]\n\
+name=intel-oneapi\n\
+baseurl=https://yum.repos.intel.com/oneapi\n\
+enabled=1\n\
+gpgcheck=1\n\
+gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB\n" \
+        > /etc/zypp/repos.d/intel-oneapi.repo \
     && zypper --gpg-auto-import-keys \
         install --no-confirm --no-recommends --auto-agree-with-licenses \
-            python310 python310-pip python310-devel \
-            git aria2 fish mlocate \
+            git make cmake ninja find \
+            fish shadow mlocate aria2 \
             gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
+            python310 python310-pip python310-devel \
+            intel-oneapi-compiler-dpcpp-cpp intel-oneapi-compiler-fortran \
+            intel-oneapi-mkl intel-oneapi-mkl-devel \
             cuda-cudart-11-8 cuda-compat-11-8 \
             cuda-libraries-11-8 cuda-nvtx-11-8 libnpp-11-8 libcublas-11-8 \
-            cuda-libraries-devel-11-8 libnpp-devel-11-8 libcublas-devel-11-8 \
-            cuda-cudart-devel-11-8 cuda-minimal-build-11-8 \
-            cuda-nvcc-11-8 cuda-nvrtc-devel-11-8 
+            cuda-command-line-tools-11-8 cuda-libraries-devel-11-8 \
+            cuda-minimal-build-11-8 cuda-cudart-devel-11-8 cuda-nvprof-11-8 \
+            cuda-nvml-devel-11-8 libcublas-devel-11-8 libnpp-devel-11-8 \
+            cuda-cccl-11-8 cuda-nvcc-11-8 cuda-nvrtc-devel-11-8 
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Use TCMALLOC from gperftools.
 ENV LD_PRELOAD=libtcmalloc.so
