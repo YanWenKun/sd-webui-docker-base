@@ -24,7 +24,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # If only 1 GPU_TARGET, it takes ~5min to build, on a 8-Core (Ryzen 1700) CPU.
 # https://github.com/facebookresearch/xformers/blob/main/README.md#install-troubleshooting
 # https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9"
+ENV TORCH_CUDA_ARCH_LIST="6.1;7.0;7.5;8.0;8.6;8.9"
 RUN --mount=type=cache,target=/root/.cache/pip \
     cd /root \
     && git clone --depth=1 --recurse-submodules --shallow-submodules \
@@ -46,20 +46,17 @@ RUN --mount=type=cache,target=/var/cache/zypp \
     && zypper install --no-confirm \
         python310 python310-pip \
         shadow git aria2 \
-        gperftools-devel libgthread-2_0-0 Mesa-libGL1 
+        gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
+        fish find
 
 # Use TCMALLOC from gperftools.
 ENV LD_PRELOAD=libtcmalloc.so
 
-COPY --from=Stage1 /root/wheels /tmp/wheels
-
 # Install nightly PyTorch (2.1+).
-# Install xFormers we just built.
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install wheel setuptools numpy \
     && pip install --pre torch torchvision --force-reinstall \
-        --index-url https://download.pytorch.org/whl/nightly/cu118 \
-    && pip install /tmp/wheels/*.whl
+        --index-url https://download.pytorch.org/whl/nightly/cu118 
 
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
@@ -80,6 +77,15 @@ RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
     && chown runner:runner /home/runner /home/scripts
 
 COPY --chown=runner:runner scripts/. /home/scripts/
+
+# Install xFormers we just built.
+# Run it lastly so we can benefit time-saving from parallel build.
+COPY --from=Stage1 /root/wheels /tmp/wheels
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install /tmp/wheels/*.whl
+
+# Clean up
+RUN rm -rf /tmp/*
 
 USER runner:runner
 VOLUME /home/runner
