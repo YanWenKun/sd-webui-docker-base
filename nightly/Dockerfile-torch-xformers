@@ -43,15 +43,21 @@ RUN --mount=type=cache,target=/root/pytorch/build \
     && python setup.py bdist_wheel -d /root/wheels
 
 # Compile xFormers
+# If only targets "6.1", it takes ~5min to build, on a 8-Core (Ryzen 1700) CPU.
 # https://github.com/facebookresearch/xformers/blob/main/README.md#install-troubleshooting
 # https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0;9.0a"
 RUN --mount=type=cache,target=/root/.cache/pip \
     cd /root \
     && git clone --depth=1 --recurse-submodules --shallow-submodules \
         https://github.com/facebookresearch/xformers.git \
     && cd xformers \
-    && pip install -r requirements.txt \
+    && pip install -r requirements.txt 
+
+ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0;9.0a"
+
+RUN --mount=type=cache,target=/root/xformers/build \
+    --mount=type=cache,target=/root/xformers/dist \
+    cd /root/xformers \
     && python setup.py develop \
     && python setup.py bdist_wheel -d /root/wheels
 
