@@ -63,11 +63,27 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         --index-url https://download.pytorch.org/whl/nightly/cu118 
 
 # Compile-install xformers
+# Reduce build-targets to save time on compiling!
 # https://github.com/facebookresearch/xformers/blob/main/README.md#install-troubleshooting
 # https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
-ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0"
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
+    cd /root \
+    && git clone --depth=1 --recurse-submodules --shallow-submodules \
+        https://github.com/facebookresearch/xformers.git \
+    && cd xformers \
+    && pip install -r requirements.txt 
+
+ENV TORCH_CUDA_ARCH_LIST="6.1;7.5;8.0;8.6"
+
+RUN --mount=type=cache,target=/root/xformers/build \
+    --mount=type=cache,target=/root/xformers/dist \
+    cd /root/xformers \
+    && python setup.py bdist_wheel -d /root/wheels
+
+# 'build' folder is mounted as cache and gone afterwards. There's no need to keep src.
+# But we keep wheel file for any further use.
+RUN rm -rf /root/xformers
+    && pip install /root/wheels/*.whl
 
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
