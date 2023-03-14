@@ -69,6 +69,11 @@ RUN ln -s libnvinfer_plugin.so.8 libnvinfer_plugin.so.7 \
     && ln -s libnvinfer.so.8 libnvinfer.so.7
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/python3.10/site-packages/tensorrt"
 
+# Fix for CuDNN
+WORKDIR /usr/lib64/python3.10/site-packages/torch/lib
+RUN ln -s libnvrtc-672ee683.so.11.2 libnvrtc.so 
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.10/site-packages/torch/lib"
+
 # Create a low-privilege user.
 RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
     && mkdir -p /home/runner /home/scripts \

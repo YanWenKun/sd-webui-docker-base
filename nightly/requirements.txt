@@ -63,5 +63,9 @@ mediapipe
 modelcards
 tensorboard==2.11.2
 tensorflow==2.11.0
-tensorrt==8.5.3.1
 tqdm
+########################################
+# Extra
+########################################
+tensorrt==8.5.3.1
+nvidia-cuda-nvrtc-cu11==11.8.89
