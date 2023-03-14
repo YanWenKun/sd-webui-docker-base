@@ -33,5 +33,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./nightly
+          file: ./nightly/Dockerfile
           tags: yanwk/sd-webui-base:nightly
           push: true
