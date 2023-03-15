@@ -17,11 +17,10 @@ RUN set -eu \
 # Prepare to compile PyTorch
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install wheel setuptools numpy \
-    && cd /root \
-    && git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules \
-        https://github.com/pytorch/pytorch \
-    && cd pytorch \
-    && pip install -r requirements.txt 
+    && pip install -r https://raw.githubusercontent.com/pytorch/pytorch/master/requirements.txt
+
+RUN git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules \
+        https://github.com/pytorch/pytorch.git
 
 # # fix for fbgemm
 # RUN --mount=type=cache,target=/var/cache/zypp \
@@ -36,30 +35,32 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 #     && cd build && ninja && ninja install 
 
 # Compile PyTorch
-RUN --mount=type=cache,target=/root/pytorch/build \
+RUN --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=cache,target=/root/pytorch/build \
     --mount=type=cache,target=/root/pytorch/dist  \
     cd /root/pytorch \
-    && python setup.py develop \
     && python setup.py bdist_wheel -d /root/wheels
 
-# Compile xFormers
-# If only targets "6.1", it takes ~5min to build, on a 8-Core (Ryzen 1700) CPU.
+
+# Compile xformers
+# Reduce build-targets to save time on compiling!
 # https://github.com/facebookresearch/xformers/blob/main/README.md#install-troubleshooting
 # https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
 RUN --mount=type=cache,target=/root/.cache/pip \
-    cd /root \
+    pip install -r https://raw.githubusercontent.com/facebookresearch/xformers/main/requirements.txt
+
+RUN cd /root \
     && git clone --depth=1 --recurse-submodules --shallow-submodules \
-        https://github.com/facebookresearch/xformers.git \
-    && cd xformers \
-    && pip install -r requirements.txt 
+        https://github.com/facebookresearch/xformers.git 
 
-ENV TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0"
+ENV TORCH_CUDA_ARCH_LIST="6.1;7.5;8.0;8.6"
 
-RUN --mount=type=cache,target=/root/xformers/build \
+RUN --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=cache,target=/root/xformers/build \
     --mount=type=cache,target=/root/xformers/dist \
     cd /root/xformers \
-    && python setup.py develop \
     && python setup.py bdist_wheel -d /root/wheels
+
 
 # Save the result
 FROM alpine:latest AS stage-final
