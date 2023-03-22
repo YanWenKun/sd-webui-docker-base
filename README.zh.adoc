@@ -154,7 +154,12 @@ docker run -it --rm --gpus all \
 ----
 
 
+## 感谢
+
+感谢 https://github.com/AbdBarho/stable-diffusion-webui-docker[AbdBarho] 对 SD-WebUI 容器化的投入与可靠的成果，这是我灵感的来源。如果我需要用多套 WebUI 而只保留一套模型，我一定会考虑 `webui-docker`。
+
 ## 声明
 
 代码使用
 link:LICENSE[木兰宽松许可证，第2版] 。
+中英双语哦！

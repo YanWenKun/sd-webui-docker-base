@@ -139,6 +139,10 @@ docker run -it --rm --gpus all \
 ----
 
 
+## Special Thanks
+
+Thank again for https://github.com/AbdBarho/stable-diffusion-webui-docker[AbdBarho]'s devotion and brilliant works, which my inspiration emerged from. I would definitely consider `webui-docker` if I want to deploy multiple WebUIs and only one set of models.
+
 ## License
 
 link:LICENSE[Mulan Permissive Software License，Version 2]
