@@ -35,6 +35,7 @@ Pillow
 pytorch_lightning<2.0.0
 realesrgan
 resize-right
+rich
 safetensors
 scikit-image
 timm
