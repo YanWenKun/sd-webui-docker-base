@@ -21,7 +21,7 @@ ENV LD_PRELOAD=libtcmalloc.so
 
 # Install PyTorch & xFormers (stable version)
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install torch torchvision \
+    pip install torch==1.13.1 torchvision \
     && pip install xformers
 
 # All remaining deps are described in txt
