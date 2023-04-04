@@ -7,7 +7,7 @@
 
 * 使用 PyTorch 官方的 nightly 版，目前（2023/4/5）为 PyTorch 2.1 - CUDA 11.8 - CPython 3.10
 * 编译安装 https://github.com/facebookresearch/xformers[来自 GitHub 最新的 xFormers]
-** 编译器优化的架构版本（为了节约编译时间）： `6.1;7.5;8.0;8.6`
+** 编译器优化的架构版本（为了节约编译时间）： `6.1+PTX;7.5;8.0;8.6;8.9`
 ** 参考： https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/[Matching CUDA arch and CUDA gencode for various NVIDIA architectures]
 ** 覆盖常见游戏卡，算力卡建议按需调整。你可以使用 link:Dockerfile-bulky[bulky] 镜像来构建仅适配你显卡的 xFormers
 

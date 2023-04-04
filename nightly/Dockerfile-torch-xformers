@@ -53,7 +53,7 @@ RUN cd /root \
     && git clone --depth=1 --recurse-submodules --shallow-submodules \
         https://github.com/facebookresearch/xformers.git 
 
-ENV TORCH_CUDA_ARCH_LIST="6.1;7.5;8.0;8.6"
+ENV TORCH_CUDA_ARCH_LIST="6.1+PTX;7.5;8.0;8.6;8.9"
 
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=cache,target=/root/xformers/build \

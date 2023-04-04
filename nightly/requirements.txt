@@ -17,12 +17,12 @@ basicsr
 blendmodes
 clean-fid
 einops
-fastapi==0.94.0
+fastapi==0.95.0
 font-roboto
 fonts
 gfpgan
 GitPython
-gradio==3.23
+gradio==3.24.1
 httpcore
 inflection
 jsonmerge
@@ -32,7 +32,7 @@ numpy
 omegaconf
 piexif
 Pillow
-pytorch_lightning<2.0.0
+pytorch_lightning
 realesrgan
 resize-right
 rich
@@ -70,7 +70,7 @@ ftfy
 lion-pytorch
 mediapipe
 modelcards
-tensorboard==2.12.0
+tensorboard==2.12.1
 tensorflow==2.12.0
 tqdm
 ########################################
