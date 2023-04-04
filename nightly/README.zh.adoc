@@ -5,11 +5,11 @@
 ** 如果用 WebUI 的插件管理页面进行安装，则会下载它默认依赖版本，比较老但能用
 ** 可以通过手动 `git clone` 下载，避免 WebUI 自动安装老版本依赖
 
-* 使用来自 https://pypi.org/project/xformers/#history[PyPI] 的 xFormers pre-release
-** （编译的目标 GPU 架构太多，使用 GitHub CI 会超时）
-* 使用 PyTorch 1.13.1 + CUDA 11.7
-** （用了二进制的 xFormers 包就得用它指定版本的 PyTorch，强行覆盖会报错，所以只能用稳定版）
-** 你可以使用 link:Dockerfile-bulky[bulky] 镜像来构建仅适配你显卡的 xFormers
+* 使用 PyTorch 官方的 nightly 版，目前（2023/4/5）为 PyTorch 2.1 - CUDA 11.8 - CPython 3.10
+* 编译安装 https://github.com/facebookresearch/xformers[来自 GitHub 最新的 xFormers]
+** 编译器优化的架构版本（为了节约编译时间）： `6.1;7.5;8.0;8.6`
+** 参考： https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/[Matching CUDA arch and CUDA gencode for various NVIDIA architectures]
+** 覆盖常见游戏卡，算力卡建议按需调整。你可以使用 link:Dockerfile-bulky[bulky] 镜像来构建仅适配你显卡的 xFormers
 
 ## 运行命令
 

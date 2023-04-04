@@ -7,11 +7,11 @@
 ** If you use WebUI'e extension page to install, it will install its specified version of deps.
 ** You could use `git clone` to download extensions, avoiding WebUI's auto `pip install`.
 
-* Using xFormers pre-release from https://pypi.org/project/xformers/#history[PyPI].
-** (I tried to compile xFormers on GitHub CI, but it will timeout. There're too many GPU arch targets to build, it's very time-consuming.)
-* Using PyTorch 1.13.1 + CUDA 11.7
-** (By using xFormers binary, the version of PyTorch have to match its specification, therefore I can't use nightly version of PyTorch.)
-** Try build your own link:Dockerfile-bulky[bulky] version of image if you need latest PyTorch.
+* Using PyTorch official nightly build, currently (2023/4/5) PyTorch 2.1 - CUDA 11.8 - CPython 3.10
+* Compile-install xFormers from https://github.com/facebookresearch/xformers[GitHub].
+** Compiler gen-code (for saving build time): `6.1;7.5;8.0;8.6`.
+** Reference: https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/
+** Try build your own link:Dockerfile-bulky[bulky] version of image to match your exactly GPUs.
 
 ## Usage
 

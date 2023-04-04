@@ -22,13 +22,19 @@ RUN --mount=type=cache,target=/var/cache/zypp \
 # Use TCMALLOC from gperftools.
 ENV LD_PRELOAD=libtcmalloc.so
 
+# Install PyTorch nightly
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install wheel setuptools numpy 
+    pip install wheel setuptools numpy \
+    && pip install --pre torch torchvision \
+        --index-url https://download.pytorch.org/whl/nightly/cu118 
 
-# Install xFormers (dev)
-# xFormers will specify its dep version of PyTorch, don't install it manually.
+# Install xFormers from compiled wheel file.
+# Script: https://github.com/YanWenKun/ComfyUI-Docker/blob/main/Dockerfile-xformers
+COPY --from=yanwk/comfyui-boot:xformers /wheels /root/wheels
+
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --pre -U xformers
+    pip install /root/wheels/*.whl \
+    && rm -rf /root/wheels
 
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]

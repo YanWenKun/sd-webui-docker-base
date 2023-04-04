@@ -44,6 +44,14 @@ torchdiffeq
 torchsde
 transformers
 ########################################
+# Redundant Deps from A1111/requirements.txt
+# Not necessary, just in case.
+########################################
+invisible-watermark
+opencv-contrib-python
+psutil
+requests
+########################################
 # Deps for sd-webui extensions.
 # Not necessary but save some time.
 ########################################
