@@ -115,7 +115,7 @@ A: Probably will with major changes in `launch.py` & `requirements_versions.txt`
 .Build the image, print all logs to STDOUT.
 [source,sh]
 ----
-docker build -f Dockerfile -t yanwk/sd-webui-base --progress=plain .
+docker build . -f Dockerfile -t yanwk/sd-webui-base --progress=plain
 ----
 
 .Run a one-time container

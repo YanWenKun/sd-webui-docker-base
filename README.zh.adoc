@@ -130,7 +130,7 @@ A: 会，上游的 `launch.py` 和 `requirements_versions.txt` 如果修改依�
 .构建镜像，打印所有日志（不折叠）
 [source,sh]
 ----
-docker build -f Dockerfile -t yanwk/sd-webui-base --progress=plain .
+docker build . -f Dockerfile -t yanwk/sd-webui-base --progress=plain
 ----
 
 .运行一个一次性容器
