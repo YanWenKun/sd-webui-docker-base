@@ -30,10 +30,8 @@ cd /home/runner/stable-diffusion-webui/extensions
 
 git clone https://github.com/Mikubill/sd-webui-controlnet.git \
     controlnet
-git clone https://github.com/hnmr293/posex.git \
-    posex
-git clone https://github.com/jexom/sd-webui-depth-lib.git \
-    depth-lib
+git clone https://github.com/nonnonstop/sd-webui-3d-open-pose-editor.git \
+    3d-open-pose-editor
 git clone https://github.com/AlUlkesh/stable-diffusion-webui-images-browser.git \
     images-browser
 git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete.git \
