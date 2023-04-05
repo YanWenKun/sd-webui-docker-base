@@ -35,7 +35,6 @@ Pillow
 pytorch_lightning<2.0.0
 realesrgan
 resize-right
-rich
 safetensors
 scikit-image
 timm
@@ -43,6 +42,15 @@ torch
 torchdiffeq
 torchsde
 transformers
+########################################
+# Additional Deps from A1111/requirements.txt
+# For CodeFormer.
+########################################
+invisible-watermark
+opencv-contrib-python
+psutil
+requests
+rich
 ########################################
 # Deps for sd-webui extensions.
 # Not necessary but save some time.

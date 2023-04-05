@@ -17,12 +17,12 @@ basicsr
 blendmodes
 clean-fid
 einops
-fastapi==0.95.0
+fastapi==0.94.0
 font-roboto
 fonts
 gfpgan
 GitPython
-gradio==3.24.1
+gradio==3.23
 httpcore
 inflection
 jsonmerge
@@ -35,7 +35,6 @@ Pillow
 pytorch_lightning<2.0.0
 realesrgan
 resize-right
-rich
 safetensors
 scikit-image
 timm
@@ -44,13 +43,14 @@ torchdiffeq
 torchsde
 transformers
 ########################################
-# Redundant Deps from A1111/requirements.txt
-# Not necessary, just in case.
+# Additional Deps from A1111/requirements.txt
+# For CodeFormer.
 ########################################
 invisible-watermark
 opencv-contrib-python
 psutil
 requests
+rich
 ########################################
 # Deps for sd-webui extensions.
 # Not necessary but save some time.
