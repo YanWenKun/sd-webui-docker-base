@@ -32,7 +32,7 @@ numpy
 omegaconf
 piexif
 Pillow
-pytorch_lightning
+pytorch_lightning<2.0.0
 realesrgan
 resize-right
 rich
