@@ -29,6 +29,11 @@ COPY ["requirements.txt","/root/"]
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r /root/requirements.txt
 
+# Fix for CuDNN
+WORKDIR /usr/lib64/python3.10/site-packages/torch/lib
+RUN ln -s libnvrtc-672ee683.so.11.2 libnvrtc.so 
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.10/site-packages/torch/lib"
+
 # Create a low-privilege user.
 RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
     && mkdir -p /home/runner /home/scripts \
