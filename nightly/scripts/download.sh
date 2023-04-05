@@ -14,9 +14,11 @@ git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 mkdir -p /home/runner/stable-diffusion-webui/repositories
 cd /home/runner/stable-diffusion-webui/repositories
 
-git clone https://github.com/Stability-AI/stablediffusion.git \
+git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules \
+    https://github.com/Stability-AI/stablediffusion.git \
     stable-diffusion-stability-ai
-git clone https://github.com/CompVis/taming-transformers.git \
+git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules \
+    https://github.com/CompVis/taming-transformers.git \
     taming-transformers
 git clone https://github.com/crowsonkb/k-diffusion.git \
     k-diffusion
