@@ -33,8 +33,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     -r /root/requirements.txt
 
 # Fix for CuDNN
-WORKDIR /usr/lib64/python3.11/site-packages/torch/lib
-RUN ln -s libnvrtc-672ee683.so.11.2 libnvrtc.so 
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.11/site-packages/torch/lib"
 
 # Create a low-privilege user.
