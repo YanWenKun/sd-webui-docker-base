@@ -29,7 +29,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r /root/requirements.txt
+    pip install --break-system-packages \
+    -r /root/requirements.txt
 
 # Fix for CuDNN
 WORKDIR /usr/lib64/python3.11/site-packages/torch/lib
