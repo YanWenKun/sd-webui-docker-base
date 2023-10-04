@@ -14,7 +14,8 @@ WORKDIR /root
 RUN --mount=type=cache,target=/var/cache/zypp \
     set -eu \
     && zypper install --no-confirm \
-        python310 python310-pip \
+        python311 python311-pip \
+        python311-wheel python311-setuptools python311-numpy \
         shadow git aria2 \
         gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
         fish find mlocate
@@ -24,33 +25,31 @@ ENV LD_PRELOAD=libtcmalloc.so
 
 # Install PyTorch nightly
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install wheel setuptools numpy \
-    && pip install --pre torch torchvision \
-        --index-url https://download.pytorch.org/whl/nightly/cu118 
+    pip install --break-system-packages \
+        --pre torch torchvision \
+        --index-url https://download.pytorch.org/whl/nightly/cu121 
 
-# Install xFormers from compiled wheel file.
-# Script: https://github.com/YanWenKun/ComfyUI-Docker/blob/main/Dockerfile-xformers
-COPY --from=yanwk/comfyui-boot:xformers /wheels /root/wheels
-
+# Install pre-release xFormers
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install /root/wheels/*.whl \
-    && rm -rf /root/wheels
+    pip install --break-system-packages \
+        --pre xformers
 
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r /root/requirements.txt
+    pip install --break-system-packages \
+        -r /root/requirements.txt
 
 # Fix for TensorRT
-WORKDIR /usr/lib/python3.10/site-packages/tensorrt
+WORKDIR /usr/lib/python3.11/site-packages/tensorrt
 RUN ln -s libnvinfer_plugin.so.8 libnvinfer_plugin.so.7 \
     && ln -s libnvinfer.so.8 libnvinfer.so.7
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/python3.10/site-packages/tensorrt"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/python3.11/site-packages/tensorrt"
 
 # Fix for CuDNN
-WORKDIR /usr/lib64/python3.10/site-packages/torch/lib
-RUN ln -s libnvrtc-672ee683.so.11.2 libnvrtc.so 
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.10/site-packages/torch/lib"
+WORKDIR /usr/lib64/python3.11/site-packages/torch/lib
+RUN ln -s libnvrtc-b51b459d.so.12 libnvrtc.so 
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.11/site-packages/torch/lib"
 
 # Create a low-privilege user.
 RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \

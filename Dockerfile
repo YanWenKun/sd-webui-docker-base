@@ -12,7 +12,7 @@ WORKDIR /root
 RUN --mount=type=cache,target=/var/cache/zypp \
     set -eu \
     && zypper install --no-confirm \
-        python310 python310-pip \
+        python311 python311-pip \
         shadow git aria2 \
         gperftools-devel libgthread-2_0-0 Mesa-libGL1 
 
@@ -21,8 +21,10 @@ ENV LD_PRELOAD=libtcmalloc.so
 
 # Install PyTorch & xFormers (stable version)
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118 \
-    && pip install xformers
+    pip install --break-system-packages \
+        torch torchvision --index-url https://download.pytorch.org/whl/cu118 \
+    && pip install --break-system-packages \
+        xformers
 
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
@@ -30,9 +32,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r /root/requirements.txt
 
 # Fix for CuDNN
-WORKDIR /usr/lib64/python3.10/site-packages/torch/lib
-RUN ln -s libnvrtc-672ee683.so.11.2 libnvrtc.so 
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.10/site-packages/torch/lib"
+WORKDIR /usr/lib64/python3.11/site-packages/torch/lib
+RUN ln -s libnvrtc-b51b459d.so.12 libnvrtc.so 
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.11/site-packages/torch/lib"
 
 # Create a low-privilege user.
 RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
