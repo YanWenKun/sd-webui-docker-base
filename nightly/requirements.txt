@@ -38,6 +38,7 @@ resize-right
 safetensors
 scikit-image
 timm
+tomesd
 torch
 torchdiffeq
 torchsde
