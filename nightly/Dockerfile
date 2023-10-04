@@ -29,10 +29,15 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         --pre torch torchvision \
         --index-url https://download.pytorch.org/whl/nightly/cu121 
 
-# Install pre-release xFormers
+# Install xFormers from compiled wheel file.
+# We can't just use pre-release xFormers from PyPI, it depends on stable version of PyTorch.
+# Script: https://github.com/YanWenKun/ComfyUI-Docker/blob/main/Dockerfile-xformers
+COPY --from=yanwk/comfyui-boot:xformers /wheels /root/wheels
+
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --break-system-packages \
-        --pre xformers
+        /root/wheels/*.whl \
+    && rm -rf /root/wheels
 
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
