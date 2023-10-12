@@ -24,7 +24,7 @@ RUN set -eu \
 RUN --mount=type=cache,target=/var/cache/zypp \
     zypper install -y \
         git make cmake ninja find \
-        fish shadow mlocate aria2 \
+        fish shadow plocate aria2 \
         gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
         python310 python310-pip python310-devel 
 

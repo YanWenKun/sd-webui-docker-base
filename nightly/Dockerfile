@@ -18,7 +18,7 @@ RUN --mount=type=cache,target=/var/cache/zypp \
         python311-wheel python311-setuptools python311-numpy \
         shadow git aria2 \
         gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
-        fish find mlocate
+        fish find plocate
 
 # Use TCMALLOC from gperftools.
 ENV LD_PRELOAD=libtcmalloc.so
