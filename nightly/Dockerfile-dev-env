@@ -34,9 +34,9 @@ gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.
     && zypper --gpg-auto-import-keys \
         install --no-confirm --no-recommends --auto-agree-with-licenses \
             git make cmake ninja find \
-            fish shadow mlocate \
+            fish shadow mlocate fd \
             gperftools-devel \
-            python310 python310-pip python310-devel \
+            python311 python311-pip python311-devel \
             intel-oneapi-compiler-dpcpp-cpp intel-oneapi-compiler-fortran \
             intel-oneapi-mkl intel-oneapi-mkl-devel \
             cuda-cudart-12-1 cuda-compat-12-1 \
