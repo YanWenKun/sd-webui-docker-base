@@ -14,26 +14,26 @@ RUN --mount=type=cache,target=/var/cache/zypp \
     && zypper install --no-confirm \
         python311 python311-pip \
         shadow git aria2 \
-        gperftools-devel libgthread-2_0-0 Mesa-libGL1 
+        gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
+    && rm /usr/lib64/python3.11/EXTERNALLY-MANAGED
 
 # Use TCMALLOC from gperftools.
 ENV LD_PRELOAD=libtcmalloc.so
 
-# Install PyTorch & xFormers (stable version)
+# Install xFormers (will install PyTorch as well)
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --break-system-packages \
-        torch torchvision --index-url https://download.pytorch.org/whl/cu118 \
-    && pip install --break-system-packages \
-        xformers
+    pip install -U xformers
 
 # All remaining deps are described in txt
 COPY ["requirements.txt","/root/"]
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --break-system-packages \
-    -r /root/requirements.txt
+    pip install -r /root/requirements.txt
 
-# Fix for CuDNN
+# Fix for libs (.so files)
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.11/site-packages/torch/lib"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/python3.11/site-packages/nvidia/cufft/lib"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/python3.11/site-packages/nvidia/cuda_runtime/lib"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/python3.11/site-packages/nvidia/cuda_cupti/lib"
 
 # Create a low-privilege user.
 RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
