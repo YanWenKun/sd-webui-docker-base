@@ -5,7 +5,7 @@ set -eu
 cd /home/runner
 
 # Install SD-WebUI or update it.
-if [ ! -f "/home/runner/stable-diffusion-webui/webui.py" ] ; then
+if [ ! -f "/home/runner/.sdw-download-complete" ] ; then
     chmod +x /home/scripts/download.sh
     bash /home/scripts/download.sh
 else
