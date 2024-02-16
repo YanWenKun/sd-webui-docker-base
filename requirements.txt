@@ -8,6 +8,7 @@ open-clip-torch
 opencv-python-headless
 git+https://github.com/openai/CLIP.git
 -r https://github.com/sczhou/CodeFormer/raw/master/requirements.txt
+-r https://github.com/crowsonkb/k-diffusion/raw/master/requirements.txt
 ########################################
 # Deps reorganized from A1111/requirements_versions.txt .
 # Removed most of version numbers. Crazy but still works.
