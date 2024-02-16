@@ -19,7 +19,7 @@ Keeping the app & data in one place, and leaving the dependency in Docker.
 
 1. At first start, a script will download latest SD-WebUI, some extensions and essential models.
 2. The whole SD-WebUI will be stored in a local folder (`./storage/stable-diffusion-webui`).
-3. If you already have a SD-WebUI bundle, put it there so the start script will skip downloading.
+3. If you already have a SD-WebUI bundle, put it there and make an empty file (`./storage/.sdw-download-complete`) so the start script will skip downloading.
 4. At every restart of the container, a script will update SD-WebUI & its extensions.
 
 

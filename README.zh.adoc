@@ -14,7 +14,7 @@ image::docs/chart-concept.zh.svg["理念"]
 
 1. 初次启动时，启动脚本会下载 SD-WebUI、必要的模型以及一些扩展。
 2. 整个 SD-WebUI 会保存在本地 (`./storage/stable-diffusion-webui`) 。
-3. 如果你已经有了现成的 SD-WebUI 包，放在上述目录，启动脚本会跳过下载。
+3. 如果你已经有了现成的 SD-WebUI 包，放在上述目录，并新建一个空白文件 (`./storage/.sdw-download-complete`)，启动脚本会跳过下载。
 4. 之后容器每次启动时，启动脚本会自动更新 SD-WebUI 及其扩展。
 
 
