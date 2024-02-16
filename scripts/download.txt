@@ -1,78 +1,85 @@
-https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_base_caption_capfilt_large.pth
-  out=models/BLIP/model_base_caption_capfilt_large.pth
-https://github.com/sczhou/CodeFormer/releases/download/v0.1.0/codeformer.pth
-  out=models/Codeformer/codeformer.pth
-https://github.com/TencentARC/GFPGAN/releases/download/v1.3.4/GFPGANv1.4.pth
-  out=models/GFPGAN/GFPGANv1.4.pth
-https://heibox.uni-heidelberg.de/f/31a76b13ea27482981b4/?dl=1
-  out=models/LDSR/project.yaml
-https://heibox.uni-heidelberg.de/f/578df07c8fc04ffbadf3/?dl=1
-  out=models/LDSR/model.ckpt
-https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth
-  out=models/RealESRGAN/RealESRGAN_x4plus.pth
-https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth
-  out=models/RealESRGAN/RealESRGAN_x4plus_anime_6B.pth
+# Stable Diffusion
+
 https://huggingface.co/webui/instruct-pix2pix/resolve/main/instruct-pix2pix-00-22000-pruned.safetensors
   out=models/Stable-diffusion/instruct-pix2pix-00-22000-pruned.safetensors
 https://huggingface.co/webui/stable-diffusion-inpainting/resolve/main/sd-v1-5-inpainting.safetensors
   out=models/Stable-diffusion/sd-v1-5-inpainting.safetensors
+
+# VAE
+
 https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
   out=models/VAE/vae-ft-mse-840000-ema-pruned.safetensors
-https://github.com/intel-isl/DPT/releases/download/1_0/dpt_hybrid-midas-501f0c75.pt
-  out=models/midas/dpt_hybrid-midas-501f0c75.pt
+
+# Upscale
+
+https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth
+  out=models/RealESRGAN/RealESRGAN_x4plus.pth
+https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth
+  out=models/RealESRGAN/RealESRGAN_x4plus_anime_6B.pth
+https://heibox.uni-heidelberg.de/f/31a76b13ea27482981b4/?dl=1
+  out=models/LDSR/project.yaml
+https://heibox.uni-heidelberg.de/f/578df07c8fc04ffbadf3/?dl=1
+  out=models/LDSR/model.ckpt
+
+# Face Restoration
+
+https://github.com/TencentARC/GFPGAN/releases/download/v1.3.4/GFPGANv1.4.pth
+  out=models/GFPGAN/GFPGANv1.4.pth
+https://github.com/sczhou/CodeFormer/releases/download/v0.1.0/codeformer.pth
+  out=models/Codeformer/codeformer.pth
+
+# Image-Text retrieval
+
+https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_base_caption_capfilt_large.pth
+  out=models/BLIP/model_base_caption_capfilt_large.pth
 https://github.com/AUTOMATIC1111/TorchDeepDanbooru/releases/download/v1/model-resnet_custom_v3.pt
   out=models/torch_deepdanbooru/model-resnet_custom_v3.pt
+
+# Text/Image Encoder
+
+https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt
+  out=/home/runner/.cache/clip/ViT-L-14.pt
+
+# Image relative inverse depth
+
+https://github.com/intel-isl/DPT/releases/download/1_0/dpt_hybrid-midas-501f0c75.pt
+  out=models/midas/dpt_hybrid-midas-501f0c75.pt
+
+# Embeddings
+
 https://huggingface.co/datasets/gsdf/EasyNegative/resolve/main/EasyNegative.safetensors
   out=embeddings/EasyNegative.safetensors
 https://civitai.com/api/download/models/5637
   out=embeddings/ng_deepnegative_v1_75t.pt
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors
-  out=models/ControlNet/control_canny-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors
-  out=models/ControlNet/control_depth-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors
-  out=models/ControlNet/control_hed-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_mlsd-fp16.safetensors
-  out=models/ControlNet/control_mlsd-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_normal-fp16.safetensors
-  out=models/ControlNet/control_normal-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors
-  out=models/ControlNet/control_openpose-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors
-  out=models/ControlNet/control_scribble-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_seg-fp16.safetensors
-  out=models/ControlNet/control_seg-fp16.safetensors
-https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_canny_fp16.safetensors
-  out=models/ControlNet/diff_control_sd15_canny_fp16.safetensors
-https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_depth_fp16.safetensors
-  out=models/ControlNet/diff_control_sd15_depth_fp16.safetensors
-https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_hed_fp16.safetensors
-  out=models/ControlNet/diff_control_sd15_hed_fp16.safetensors
-https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_mlsd_fp16.safetensors
-  out=models/ControlNet/diff_control_sd15_mlsd_fp16.safetensors
-https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_normal_fp16.safetensors
-  out=models/ControlNet/diff_control_sd15_normal_fp16.safetensors
-https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_openpose_fp16.safetensors
-  out=models/ControlNet/diff_control_sd15_openpose_fp16.safetensors
-https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_scribble_fp16.safetensors
-  out=models/ControlNet/diff_control_sd15_scribble_fp16.safetensors
-https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_seg_fp16.safetensors
-  out=models/ControlNet/diff_control_sd15_seg_fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors
-  out=models/ControlNet/t2iadapter_canny-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_color-fp16.safetensors
-  out=models/ControlNet/t2iadapter_color-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors
-  out=models/ControlNet/t2iadapter_depth-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_keypose-fp16.safetensors
-  out=models/ControlNet/t2iadapter_keypose-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors
-  out=models/ControlNet/t2iadapter_openpose-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_seg-fp16.safetensors
-  out=models/ControlNet/t2iadapter_seg-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors
-  out=models/ControlNet/t2iadapter_sketch-fp16.safetensors
-https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors
-  out=models/ControlNet/t2iadapter_style-fp16.safetensors
-https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt
-  out=/home/runner/.cache/clip/ViT-L-14.pt
+
+# ControlNet
+# For more models, see: https://huggingface.co/lllyasviel/sd_control_collection
+
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_ip2p.pth
+  out=models/ControlNet/control_v11e_sd15_ip2p.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_shuffle.pth
+  out=models/ControlNet/control_v11e_sd15_shuffle.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth
+  out=models/ControlNet/control_v11f1e_sd15_tile.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.pth
+  out=models/ControlNet/control_v11f1p_sd15_depth.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_canny.pth
+  out=models/ControlNet/control_v11p_sd15_canny.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_inpaint.pth
+  out=models/ControlNet/control_v11p_sd15_inpaint.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_lineart.pth
+  out=models/ControlNet/control_v11p_sd15_lineart.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_mlsd.pth
+  out=models/ControlNet/control_v11p_sd15_mlsd.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_normalbae.pth
+  out=models/ControlNet/control_v11p_sd15_normalbae.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_openpose.pth
+  out=models/ControlNet/control_v11p_sd15_openpose.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_scribble.pth
+  out=models/ControlNet/control_v11p_sd15_scribble.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_seg.pth
+  out=models/ControlNet/control_v11p_sd15_seg.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_softedge.pth
+  out=models/ControlNet/control_v11p_sd15_softedge.pth
+https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15s2_lineart_anime.pth
+  out=models/ControlNet/control_v11p_sd15s2_lineart_anime.pth
