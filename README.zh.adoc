@@ -69,7 +69,7 @@ docker pull yanwk/sd-webui-base
 启动完成后，访问 http://localhost:7860/
 
 
-## link:nightly/README.zh.adoc[不稳定最新版]
+## （作废） link:nightly/README.zh.adoc[不稳定最新版]
 
 标签为 `nightly` 的 Docker 镜像：
 

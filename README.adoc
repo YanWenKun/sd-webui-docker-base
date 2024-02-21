@@ -73,7 +73,7 @@ docker pull yanwk/sd-webui-base
 Once the app is loaded, visit http://localhost:7860/
 
 
-## link:nightly/README.adoc[Nightly Build]
+## (Deprecated) link:nightly/README.adoc[Nightly Build] 
 
 For image tag `nightly`:
 
