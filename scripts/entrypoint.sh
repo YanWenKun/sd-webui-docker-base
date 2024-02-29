@@ -9,7 +9,7 @@ if [ ! -f "/home/runner/.sdw-download-complete" ] ; then
     chmod +x /home/scripts/download.sh
     bash /home/scripts/download.sh
 else
-    # If update failed, just go on.
+    # If update failed, just skip.
     set +e
     chmod +x /home/scripts/update.sh
     bash /home/scripts/update.sh

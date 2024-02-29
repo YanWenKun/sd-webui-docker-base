@@ -1,4 +1,3 @@
-version: "3"
 services:
   # An old issue: docker-compose will mount volume as root.
   # Workaround: https://github.com/docker/compose/issues/3270
@@ -13,6 +12,7 @@ services:
     volumes: 
       - "./storage:/home/runner"
     command: "chown -R runner:runner /home/runner"
+
   stable-diffusion:
     container_name: sd-webui
     depends_on:
@@ -28,6 +28,8 @@ services:
       - "./storage:/home/runner"
     environment:
       - CLI_ARGS=--xformers --medvram --allow-code --api --enable-insecure-extension-access 
+    security_opt:
+      - "label=type:nvidia_container_t"
     stop_signal: SIGINT
     deploy:
       resources:
