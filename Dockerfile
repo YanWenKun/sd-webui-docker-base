@@ -18,6 +18,7 @@ RUN --mount=type=cache,target=/var/cache/zypp \
         gcc-c++ cmake \
         shadow git aria2 \
         gperftools-devel libgthread-2_0-0 Mesa-libGL1 \
+        libtcmalloc4 libglvnd \
     && rm /usr/lib64/python3.11/EXTERNALLY-MANAGED
 
 # Use TCMALLOC from gperftools.

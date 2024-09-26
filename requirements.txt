@@ -17,7 +17,9 @@ accelerate
 basicsr
 blendmodes
 clean-fid
+diskcache
 einops
+facexlib
 fastapi==0.94.0
 font-roboto
 fonts
@@ -33,12 +35,16 @@ lark
 numpy
 omegaconf
 piexif
-Pillow
+pillow-avif-plugin
+Pillow==9.5.0
+protobuf==3.20.0
 pytorch_lightning<2.0.0
 realesrgan
 resize-right
 safetensors
 scikit-image
+spandrel
+spandrel-extra-arches
 timm
 tomesd
 torch
