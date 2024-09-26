@@ -28,6 +28,8 @@ $gcs https://github.com/sczhou/CodeFormer.git \
     CodeFormer
 $gcs https://github.com/salesforce/BLIP.git \
     BLIP
+$gcs https://github.com/AUTOMATIC1111/stable-diffusion-webui-assets.git \
+    stable-diffusion-webui-assets
 
 mkdir -p /home/runner/stable-diffusion-webui/extensions
 cd /home/runner/stable-diffusion-webui/extensions

@@ -73,18 +73,18 @@ docker pull yanwk/sd-webui-base
 Once the app is loaded, visit http://localhost:7860/
 
 
-## (Deprecated) link:nightly/README.adoc[Nightly Build] 
+// ## (Deprecated) link:nightly/README.adoc[Nightly Build] 
 
-For image tag `nightly`:
+// For image tag `nightly`:
 
-* It builds more frequently.
-* It's ready for https://github.com/d8ahazard/sd_dreambooth_extension[DreamBooth Extension].
-* It come with dev version of xFormers.
-** (Don't expect performance boost, the stable version is good enough now.)
+// * It builds more frequently.
+// * It's ready for https://github.com/d8ahazard/sd_dreambooth_extension[DreamBooth Extension].
+// * It come with dev version of xFormers.
+// ** (Don't expect performance boost, the stable version is good enough now.)
 
-link:nightly/README.adoc[Read more about using nightly].
+// link:nightly/README.adoc[Read more about using nightly].
 
-The base `latest` will keep simple and easy for people to modify.
+// The base `latest` will keep simple and easy for people to modify.
 
 
 [[q-n-a]]
