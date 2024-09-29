@@ -154,6 +154,29 @@ docker run -it --rm --gpus all \
 ----
 
 
+.rootless 运行 (Podman)
+
+容器内文件挂载为 root，程序也以 root 执行。而在宿主机一侧看来，文件还是本来的用户所有权。
+
+[source,sh]
+----
+mkdir -p storage
+
+podman pull docker.io/yanwk/sd-webui-base:latest
+
+podman run -it --rm \
+  --name sd-webui-rootless \
+  --device nvidia.com/gpu=all \
+  --security-opt label=disable \
+  -p 7860:7860 \
+  -v "$(pwd)"/storage:/root \
+  --user root \
+  --workdir /root \
+  -e CLI_ARGS="--xformers --medvram --allow-code --api --enable-insecure-extension-access" \
+  yanwk/sd-webui-base:latest \
+  /bin/bash /home/scripts/root-wrapper.sh
+----
+
 ## 感谢
 
 感谢 https://github.com/AbdBarho/stable-diffusion-webui-docker[AbdBarho] 对 SD-WebUI 容器化的投入与可靠的成果，这是我灵感的来源。如果我需要用多套 WebUI 而只保留一套模型，我一定会考虑 `webui-docker`。

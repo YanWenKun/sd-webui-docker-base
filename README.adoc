@@ -138,6 +138,28 @@ docker run -it --rm --gpus all \
   yanwk/sd-webui-base:latest /bin/bash
 ----
 
+.Run a rootless container (Podman)
+
+Inside the pod, Podman will mount volume as root, scripts will run as root. And from the host side, we see files keep their original ownership.
+
+[source,sh]
+----
+mkdir -p storage
+
+podman pull docker.io/yanwk/sd-webui-base:latest
+
+podman run -it --rm \
+  --name sd-webui-rootless \
+  --device nvidia.com/gpu=all \
+  --security-opt label=disable \
+  -p 7860:7860 \
+  -v "$(pwd)"/storage:/root \
+  --user root \
+  --workdir /root \
+  -e CLI_ARGS="--xformers --medvram --allow-code --api --enable-insecure-extension-access" \
+  yanwk/sd-webui-base:latest \
+  /bin/bash /home/scripts/root-wrapper.sh
+----
 
 ## Special Thanks
 
