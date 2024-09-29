@@ -36,8 +36,6 @@ cd /home/runner/stable-diffusion-webui/extensions
 
 $gcs https://github.com/Mikubill/sd-webui-controlnet.git \
     controlnet
-$gcs https://github.com/nonnonstop/sd-webui-3d-open-pose-editor.git \
-    3d-open-pose-editor
 $gcs https://github.com/AlUlkesh/stable-diffusion-webui-images-browser.git \
     images-browser
 $gcs https://github.com/DominikDoom/a1111-sd-webui-tagcomplete.git \
