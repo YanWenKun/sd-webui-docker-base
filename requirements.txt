@@ -45,7 +45,6 @@ safetensors
 scikit-image
 spandrel
 spandrel-extra-arches
-timm
 tomesd
 torch
 torchdiffeq
@@ -69,3 +68,16 @@ Flask
 Send2Trash
 spandrel
 svglib
+########################################
+# For sd-webui-controlnet
+########################################
+fvcore
+mediapipe
+opencv-python>=4.8.0
+addict
+yapf
+albumentations==1.4.3
+matplotlib
+timm<=0.9.5
+pydantic<=1.10.17
+controlnet_aux>=0.0.9
